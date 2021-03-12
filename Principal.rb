@@ -1,2 +1,1 @@
-puts "Hello World!"
-puts "Hi, I am Pedro"
+#Documento auxiliar para poder añadirlo a git
