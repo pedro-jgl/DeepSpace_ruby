@@ -1,3 +1,3 @@
-#coding: utf-8
+# encoding : UTF−8
 #Documento auxiliar para poder añadirlo a git
 #madreeeeeeeeeeeee
