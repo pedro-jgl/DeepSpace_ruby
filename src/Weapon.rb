@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require_relative 'WeaponType'
+
 class Weapon 
   
   def initialize(name, type, uses)

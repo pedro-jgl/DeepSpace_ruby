@@ -1,11 +1,11 @@
 # encoding: utf-8
 
-class shieldBooster
+class ShieldBooster
     
   def initialize(name, boost, uses)
-      @name = name
-      @boost = boost
-      @uses = uses
+    @name = name
+    @boost = boost
+    @uses = uses
   end
   
   def self.newCopy(s)
@@ -24,14 +24,13 @@ class shieldBooster
   
   def useIt
     if (@uses > 0)
-        @uses -= 1
-        return @uses
+      @uses -= 1
+      return @uses
     else
       return 1.0   
     end
-    
+   
   end
-
 
 end
     
