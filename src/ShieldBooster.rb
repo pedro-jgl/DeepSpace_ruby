@@ -21,6 +21,9 @@ class ShieldBooster
   end
 
   #Añadir consultor de name??
+  def name
+    return @name
+  end
   
   def useIt
     if (@uses > 0)

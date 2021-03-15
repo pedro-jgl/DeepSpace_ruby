@@ -28,7 +28,7 @@ class Loot
   end   
   
   def nMedals
-    return @nnMedals  
+    return @nMedals  
   end
   
 

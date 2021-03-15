@@ -15,6 +15,10 @@ class Weapon
     
   end
   
+  #Añadir un consultor de name??
+  def name
+    return @name
+  end
 
   def type
     return @type

@@ -37,8 +37,7 @@ empieza_pl1 = 0
 empieza_pl2 = 0
 tiro = 0
 semueve = 0
-aux
-
+aux = nil
 
 puts lote.inspect
 puts dado1.inspect
@@ -48,7 +47,7 @@ puts "\n"
 
 puts dado1.initWithNHangars
 puts dado1.initWithNWeapons
-puts dado1.initWithShields
+puts dado1.initWithNShields
 puts dado1.whoStarts(PLAYERS)
 puts dado1.firstShot
 puts dado1.spaceStationMoves(SPEED)
@@ -69,18 +68,19 @@ puts paquete.ammoPower
 puts paquete.fuelUnits
 puts paquete.shieldPower
 
+puts arma.inspect
 puts arma.type
 puts arma.useIt
 puts arma.uses
 puts arma.useIt
 puts arma.power
 
-for i in range(VECES_A_TIRAR)
-  if dado.initWithNHangar == 1
+for i in 0..VECES_A_TIRAR
+  if dado.initWithNHangars == 1
     nhangar += 1
   end
 
-  if dado.initWithShields == 1
+  if dado.initWithNShields == 1
     nescudo += 1
   end
 
@@ -94,7 +94,7 @@ for i in range(VECES_A_TIRAR)
 
 
     
-  case x
+  case dado.whoStarts(PLAYERS)
   when 1
     empieza_pl1 +=1
   when 2
@@ -126,6 +126,5 @@ puts "Primer tiro ESTACIÓN: " + tiro.to_s
 puts "Primer tiro VILLANOS: " + (VECES_A_TIRAR - tiro).to_s
 puts "Número de veces que se mueve: " + semueve.to_s
 puts "Número de veces que no se mueve: " + (VECES_A_TIRAR - semueve).to_s
-puts "Número de Hangars con resultado 1: " + nhangar.to_s
 
     

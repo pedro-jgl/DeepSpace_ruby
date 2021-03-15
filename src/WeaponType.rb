@@ -7,7 +7,7 @@ module WeaponType
       @power = p  
     end
 
-    def getPowers
+    def getPower
       return @power
     end
 

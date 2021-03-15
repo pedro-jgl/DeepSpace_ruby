@@ -37,7 +37,7 @@ class Dice
         
   end
     
-  def initWithShields
+  def initWithNShields
     @generator = rand
 
     if @generator <= @NSHIELDSPROB
