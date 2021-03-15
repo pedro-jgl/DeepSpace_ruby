@@ -1,6 +1,6 @@
-# encoding: UTF-8
+# encoding: utf-8
 
 module GameCharacter  
   SPACESTATION=:spacestation    
-  NEMYSTARSHIP=:enemystarship 
+  ENEMYSTARSHIP=:enemystarship 
 end

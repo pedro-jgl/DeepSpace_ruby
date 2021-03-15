@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 
 module WeaponType
   class Type 
@@ -7,7 +7,7 @@ module WeaponType
       @power = p  
     end
 
-    def getPower()
+    def getPowers
       return @power
     end
 
