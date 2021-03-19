@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+module Deepspace
+
 class SuppliesPackage
 
   def initialize(amP, flUn, shP)
@@ -31,4 +33,6 @@ class SuppliesPackage
     return cadena;  
   end
 
-end
+end #class
+
+end #module

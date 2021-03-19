@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+module Deepspace
+
 class Loot
   
   def initialize(nSup, nWeap, nShie, nHang, nMed)
@@ -41,4 +43,6 @@ class Loot
   def getUIVersion
     return LootToUI.newCopy(this)
   end
-end
+end #class
+
+end #module

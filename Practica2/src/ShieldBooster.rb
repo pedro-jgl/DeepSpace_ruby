@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+module Deepspace
+
 class ShieldBooster
     
   def initialize(name, boost, uses)
@@ -43,5 +45,7 @@ class ShieldBooster
   def getUIVersion
     return ShieldToUI.newCopy(this)
   end
-end
+  
+end #class
     
+end #module

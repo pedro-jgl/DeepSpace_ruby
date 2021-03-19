@@ -2,6 +2,8 @@
 
 require_relative 'WeaponType'
 
+module Deepspace
+
 class Weapon 
   
   def initialize(name, type, uses)
@@ -52,4 +54,7 @@ class Weapon
   def getUIVersion
     return WeaponToUI.newCopy(this)
   end
-end
+
+end #classs
+
+end #module

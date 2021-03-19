@@ -13,6 +13,7 @@ require_relative 'WeaponType'
 
 #Dir["./*"].each {|file| require_relative file }
 
+module Deepspace #Es necesario??
 
 VECES_A_TIRAR = 100
 PLAYERS = 3
@@ -127,4 +128,5 @@ puts "Primer tiro VILLANOS: " + (VECES_A_TIRAR - tiro).to_s
 puts "Número de veces que se mueve: " + semueve.to_s
 puts "Número de veces que no se mueve: " + (VECES_A_TIRAR - semueve).to_s
 
+end #module
     

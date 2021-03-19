@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+module Deepspace
 
 class Dice 
   def initialize
@@ -84,4 +85,6 @@ class Dice
     return cadena
   end
   
-end
+end #class
+
+end #module
