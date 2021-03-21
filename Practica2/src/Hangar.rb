@@ -19,7 +19,7 @@ class Hangar
 
 
   def getUIVersion
-    return HangarToUI.new(self) #???
+    HangarToUI.new(self) #???
 
   end
 
