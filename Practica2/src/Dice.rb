@@ -79,10 +79,8 @@ class Dice
   end
 
   def to_s
-    cadena = "NHANGARSPROB: " + @NHANGARSPROB.to_s + "\nNSHIELDSPROB: " + @NSHIELDSPROB.to_s +
-    "NWEAPONSPROB: " + @NWEAPONSPROB.to_s + "FIRSTSHOTPROB: " + @FIRSTSHOTPROB.to_s
+    "NHANGARSPROB: " + @NHANGARSPROB.to_s + "\nNSHIELDSPROB: " + @NSHIELDSPROB.to_s + "NWEAPONSPROB: " + @NWEAPONSPROB.to_s + "FIRSTSHOTPROB: " + @FIRSTSHOTPROB.to_s
     
-    return cadena
   end
   
 end #class
