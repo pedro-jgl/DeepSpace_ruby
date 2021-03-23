@@ -34,10 +34,8 @@ class Loot
   end
   
   def to_s
-    cadena = "NSupplies: " + nSupplies().to_s + "\n NShields: " + nShields().to_s + 
-    "\nNHangars: " + nHangars().to_s + "\nNMedals: " + nMedals().to_s;
+    out = "NSupplies: " + nSupplies().to_s + "\n NShields: " + nShields().to_s +  "\nNHangars: " + nHangars().to_s + "\nNMedals: " + nMedals().to_s
 
-    return cadena;
   end
 
   def getUIVersion

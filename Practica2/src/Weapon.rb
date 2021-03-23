@@ -45,9 +45,7 @@ class Weapon
   end
 
   def to_s
-    cadena = "Name: " + name + "\nType: " + type().to_s + "\nPower: " + power().to_s + "\nUses: " + uses().to_s;
-        
-    return cadena;
+    out = "Name: " + name + "\nType: " + type().to_s + "\nPower: " + power().to_s + "\nUses: " + uses().to_s
 
   end
   

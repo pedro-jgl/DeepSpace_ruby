@@ -97,7 +97,7 @@ class Hangar
   end
 
   def to_s
-    "El máximo de elementos del Hangar: " + getMaxElements.to_s + " weapons: " + getWeapons.to_s + " shields: " + getShieldBoosters.to_s
+    out = "El máximo de elementos del Hangar: " + getMaxElements.to_s + " weapons: " + getWeapons.to_s + " shields: " + getShieldBoosters.to_s
 
   end
 

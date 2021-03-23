@@ -79,7 +79,7 @@ class Dice
   end
 
   def to_s
-    "NHANGARSPROB: " + @NHANGARSPROB.to_s + "\nNSHIELDSPROB: " + @NSHIELDSPROB.to_s + "NWEAPONSPROB: " + @NWEAPONSPROB.to_s + "FIRSTSHOTPROB: " + @FIRSTSHOTPROB.to_s
+    out = "NHANGARSPROB: " + @NHANGARSPROB.to_s + "\nNSHIELDSPROB: " + @NSHIELDSPROB.to_s + "NWEAPONSPROB: " + @NWEAPONSPROB.to_s + "FIRSTSHOTPROB: " + @FIRSTSHOTPROB.to_s
     
   end
   

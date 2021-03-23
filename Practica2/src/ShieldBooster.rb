@@ -37,9 +37,8 @@ class ShieldBooster
   end
 
   def to_s
-    cadena = "Name: " + name() + "\nBoost: " + boost().to_s + "\nUses: " + uses().to_s;
-        
-    return cadena;
+    out = "Name: " + name() + "\nBoost: " + boost().to_s + "\nUses: " + uses().to_s
+    
   end
 
   def getUIVersion

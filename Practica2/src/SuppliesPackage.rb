@@ -27,10 +27,8 @@ class SuppliesPackage
   end
 
   def method_name
-    cadena = "AmmoPower: " + ammoPower().to_s + "\nFuelUnits: " + fuelUnits().to_s +
-    "\nShieldPower: " + shieldPower().to_s;
+    out = "AmmoPower: " + ammoPower().to_s + "\nFuelUnits: " + fuelUnits().to_s + "\nShieldPower: " + shieldPower().to_s 
 
-    return cadena;  
   end
 
 end #class
