@@ -1,0 +1,96 @@
+# encoding: utf-8
+
+module Deepspace
+
+    class Damage 
+      def initialize(w, s, wl)
+        @nShields = s
+        @nWeapons = w
+        @weapons = wl
+      end
+
+      def self.newCopy(d)
+        new(d.nWeapons, d.nShields, d.weapons)
+      end
+      
+      def nWeapons
+        return @nWeapons
+      end
+
+      def nShields
+        return @nShields          
+      end
+
+      def weapons
+        return weapons
+      end
+      s
+      def self.newNumericWeapons(w, s)
+        new(w, s, nil)
+      end
+
+      #inicializar nWeapons a nil o a 0?
+      def self.newSpecificWeapons(wl, s)
+        new(0, s, wl)
+      end
+
+      def discardWeapon(w)
+        if @weapons != nil
+    
+          @weapons.each do |weap|
+            #solucionar coincidencias, por ahora borra todos los que coincidan
+            #usar arrayContainsType?¿
+            if weap == w
+              @weapons.delete(w)
+            end
+          end
+
+        elsif @nWeapons != 0
+          @nWeapons = @nWeapons - 1
+        end
+        
+      end
+
+      def discardShieldBooster
+        if @nShields > 0
+          @nShields = @nShields - 1
+        end
+      end
+
+      def hasNoEffect
+        noeffect = false
+        if @nShields == 0 && (@weapons == nil || @weapons.length == 0) && (@nWeapons == nil || @nWeapons == 0)
+          noeffect = true
+        end
+
+        return noeffect
+      end
+    
+      #bien?¿
+      def arrayContainsType(w, t)
+        count = 0
+        w.each do |weap|
+          if weap == t 
+            return count  
+          else
+            count = count + 1
+          end
+        end
+
+        return -1
+      end
+
+      def adjust(w, s)
+        
+        for i in 1..s.length
+          self.discardShieldBooster
+        end
+
+        w.each do |weap|
+          self.discardWeapon(weap) 
+        end
+
+      end
+
+    end
+end    
