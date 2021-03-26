@@ -96,4 +96,6 @@ module Deepspace
       end
 
     end
+
+    #Falta el getUIversion y el to_s?
 end    
