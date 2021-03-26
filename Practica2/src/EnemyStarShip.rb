@@ -20,11 +20,70 @@ class EnemyStarShip
   end
 
 
-  def getUIversion()
-    
+  def getUIversion
+    EnemyToUI.new(self) #???
 
   end
 
+
+  def fire
+    @ammoPower
+
+  end 
+
+
+  def ammoPower
+    @ammoPower
+
+  end 
+
+
+  def damage 
+    @damage
+
+  end 
+
+
+  def loot 
+    @loot
+
+  end 
+
+
+  def name 
+    @name 
+
+  end
+
+
+  def shieldPower 
+    @shieldPower
+
+  end
+
+
+  def protection 
+    @shieldPower
+
+  end 
+
+
+  def receiveShor(shot)
+    resultado = ShotResult::RESIST
+
+    if shieldPower < shot 
+        resultado = ShotResult::DONOTRESIST
+
+    end 
+    
+    return resultado
+
+  end
+
+  def to_s
+    "Name: " + name + ", AmmoPower = " + ammoPower.to_s + ", ShieldPower = " + shieldPower.to_s + ", loot: " + loot.to_s + ", damage: " + damage.to_s
+
+  end
 
 end #class  
 
