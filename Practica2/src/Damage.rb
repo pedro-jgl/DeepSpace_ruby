@@ -3,6 +3,9 @@
 module Deepspace
 
     class Damage 
+      #Así se crea una constante estática?
+      @@NO_USE = -1 
+
       def initialize(w, s, wl)
         @nShields = s
         @nWeapons = w
@@ -22,16 +25,15 @@ module Deepspace
       end
 
       def weapons
-        return weapons
+        return @weapons
       end
       s
       def self.newNumericWeapons(w, s)
         new(w, s, nil)
       end
 
-      #inicializar nWeapons a nil o a 0?
       def self.newSpecificWeapons(wl, s)
-        new(0, s, wl)
+        new(NO_USE, s, wl)
       end
 
       def discardWeapon(w)
@@ -59,7 +61,7 @@ module Deepspace
 
       def hasNoEffect
         noeffect = false
-        if @nShields == 0 && (@weapons == nil || @weapons.length == 0) && (@nWeapons == nil || @nWeapons == 0)
+        if @nShields == 0 && ( (@weapons == nil && @nWeapons == 0) || (@nWeapons == NO_USE && @weapons.length == 0) )
           noeffect = true
         end
 
@@ -80,6 +82,7 @@ module Deepspace
         return -1
       end
 
+      #Modificar a como está hecha en java (Hay que devolver un damage nuevo y modificar algunas condicionales)
       def adjust(w, s)
         
         for i in 1..s.length
