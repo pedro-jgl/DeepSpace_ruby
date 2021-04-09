@@ -18,7 +18,14 @@ class GameUniverse
 
   end
 
-  #Hace falta hacer métodos getters???
+  #Hace falta hacer métodos reader o también writer?
+  attr_reader :dice
+  attr_reader :turns
+  attr_reader :gameState
+  attr_reader :currentStation
+  attr_reader :currentStationIndex
+  attr_reader :currentEnemy
+  attr_reader :spaceStations
 
   private
   def combatGo(station,enemy)
@@ -116,6 +123,20 @@ class GameUniverse
 
   end
 
+
+  def to_s()
+    cadena = "CurrentSpaceStation: " + @currentStation.to_s + "\nCurrentSpaceStationIndex: " + @currentStationIndex.to_s  + "\nTurns: " + @turns.to_s + "\nCurrentEnemy: " + @currentEnemy.to_s + "\nDice: " + @dice.to_s + "\nGameStateController: " + gameState.to_s + "\nArray de SpaceStation: "
+
+    #En caso de que sirva, dejar los demás for que indiquen también índices como este
+    @spaceStations.each_with_index do |s,i|
+      cadena += ("\nSpaceStation " + (i+1).to_s + ": " + s.to_s)
+    
+    end
+
+
+    return cadena
+    
+  end
 
 
 end #class
