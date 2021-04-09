@@ -112,7 +112,7 @@ module Deepspace
             return @fuelUnits/@@MAXFUEL
         end
 
-        def getUIVersion
+        def getUIversion
             SpaceStationToUI.new(self) #???
         end
 
