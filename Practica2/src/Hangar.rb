@@ -20,7 +20,6 @@ class Hangar
 
   def getUIVersion
     HangarToUI.new(self) #???
-
   end
 
 
@@ -98,7 +97,7 @@ class Hangar
 
   def to_s
     out = "El máximo de elementos del Hangar: " + getMaxElements.to_s + " weapons: " + getWeapons.to_s + " shields: " + getShieldBoosters.to_s
-
+    return out
   end
 
 end #class

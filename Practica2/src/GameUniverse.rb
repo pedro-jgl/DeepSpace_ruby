@@ -133,7 +133,6 @@ class GameUniverse
     
     end
 
-
     return cadena
     
   end

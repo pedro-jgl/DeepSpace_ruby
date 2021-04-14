@@ -68,7 +68,7 @@ class EnemyStarShip
   end 
 
 
-  def receiveShor(shot)
+  def receiveShot(shot)
     resultado = ShotResult::RESIST
 
     if shieldPower < shot 
@@ -81,8 +81,8 @@ class EnemyStarShip
   end
 
   def to_s
-    "Name: " + name + ", AmmoPower = " + ammoPower.to_s + ", ShieldPower = " + shieldPower.to_s + ", loot: " + loot.to_s + ", damage: " + damage.to_s
-
+    s = "Name: " + name + ", AmmoPower = " + ammoPower.to_s + ", ShieldPower = " + shieldPower.to_s + ", loot: " + loot.to_s + ", damage: " + damage.to_s
+    return s
   end
 
 end #class  

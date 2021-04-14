@@ -35,12 +35,13 @@ class Loot
   
   def to_s
     out = "NSupplies: " + nSupplies().to_s + "\n NShields: " + nShields().to_s +  "\nNHangars: " + nHangars().to_s + "\nNMedals: " + nMedals().to_s
-
+    return out
   end
 
   def getUIVersion
     return LootToUI.newCopy(this)
   end
+  
 end #class
 
 end #module

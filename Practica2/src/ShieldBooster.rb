@@ -38,7 +38,7 @@ class ShieldBooster
 
   def to_s
     out = "Name: " + name() + "\nBoost: " + boost().to_s + "\nUses: " + uses().to_s
-    
+    return out
   end
 
   def getUIVersion

@@ -27,7 +27,7 @@ module Deepspace
       def weapons
         return @weapons
       end
-      s
+      
       def self.newNumericWeapons(w, s)
         new(w, s, nil)
       end
@@ -71,6 +71,7 @@ module Deepspace
       #bien?¿
       def arrayContainsType(w, t)
         count = 0
+        
         w.each do |weap|
           if weap == t 
             return count  
@@ -95,7 +96,22 @@ module Deepspace
 
       end
 
+      def to_s
+        out = "NShields: " + nShields.to_s + "\nNWeapons: " + nWeapons.to_s + "\nWeapons:\n"
+
+        i = 0
+            for w in weapons
+                i = i + 1
+                out = out + "\n" + i + w.to_s
+            end
+        
+        return out
+      end
+
+      def getUIVersion
+        DamageToUI.new(self) #???
+      end
+
     end
 
-    #Falta el getUIversion y el to_s?
 end    
