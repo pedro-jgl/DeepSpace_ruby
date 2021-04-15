@@ -33,7 +33,7 @@ module Deepspace
       end
 
       def self.newSpecificWeapons(wl, s)
-        new(NO_USE, s, wl)
+        new(@@NO_USE, s, wl)
       end
 
       def discardWeapon(w)

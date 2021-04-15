@@ -43,6 +43,7 @@ class GameUniverse
   def discardHangar()
     if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
         @currentStation.discardHangar 
+    end
 
   end
 
@@ -50,6 +51,7 @@ class GameUniverse
   def discardShieldBooster(i)
     if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
         @currentStation.discardShieldBooster(i) 
+    end
 
   end
 
@@ -57,6 +59,7 @@ class GameUniverse
   def discardShieldBoosterInHangar(i)
     if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
         @currentStation.discardShieldBoosterInHangar(i) 
+    end
 
   end
 
@@ -64,6 +67,7 @@ class GameUniverse
   def discardWeapon(i)
     if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
         @currentStation.discardWeapon(i) 
+    end
 
   end
 
@@ -71,6 +75,7 @@ class GameUniverse
   def discardWeaponInHangar(i)
     if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
         @currentStation.discardWeaponInHangar(i) 
+    end
 
   end
 
@@ -92,6 +97,7 @@ class GameUniverse
 
     if @currentStation.nMedals == WIN
         win = True 
+    end
     
     return win
 
@@ -107,13 +113,15 @@ class GameUniverse
   def mountShieldBooster(i)
     if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
         @currentStation.mountShieldBooster(i)
+    end
 
   end
 
 
   def mountWeapon(i)
     if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
-        @currentStation.mountWeapon(i) 
+        @currentStation.mountWeapon(i)
+    end
 
   end
 

@@ -208,6 +208,8 @@ module Deepspace
             end
 
             return s
-          end
+        end
 
-    end
+    end #class
+
+end #module
