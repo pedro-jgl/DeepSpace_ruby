@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+=begin
 require_relative 'CombatResult'
 require_relative 'Damage'
 require_relative 'DamageToUI'
@@ -24,9 +25,18 @@ require_relative 'SuppliesPackage'
 require_relative 'Weapon'
 require_relative 'WeaponToUI'
 require_relative 'WeaponType'
+=end
 
+#Añade todos los require_relative:
+Directorio = "./DeepSpace_ruby/Practica2/src/"
+Dir[Directorio+"*"].each do |file|
+  file = file[Directorio.size,file.size]  #Le quitamos la ruta hasta el archivo
+  file = file[0,file.size-3]              #Le quitamos el tipo de archivo (.rb)
 
-#Dir["./*"].each {|file| require_relative file }
+  if file != "Principal"                  #Si es Principal, no lo añadimos porque se ejecutaría dos veces
+    require_relative file
+  end
+end
 
 module Deepspace #Es necesario??
 
