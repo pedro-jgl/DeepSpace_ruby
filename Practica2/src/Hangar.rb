@@ -54,7 +54,7 @@ class Hangar
     aniadido = true
 
     if spaceAvailable
-      @shieldBoosters.push(w)
+      @shieldBoosters.push(s)
     else
       aniadido = false
     end

@@ -56,7 +56,7 @@ escudo = ShieldBooster.newCopy(escudo2)
 dado = Dice.new()
 
 
-hangar = Hangar.new(3) #4 elementos maximo
+hangar = Hangar.new(4) #4 elementos maximo
 weapon1 = Weapon.new("nombre1", WeaponType::LASER , 1) #nombre, tipo, usos
 weapon2 = Weapon.new("nombre2", WeaponType::MISSILE , 2) #nombre, tipo, usos
 weapon3 = Weapon.new("nombre3", WeaponType::PLASMA , 3) #nombre, tipo, usos
@@ -79,29 +79,29 @@ naveenemiga = EnemyStarShip.new("nombre", 1, 3, lote, damage1)
 
 
 #Prueba Hangar
-puts "Hangar: ¿Tiene Espacio Libre? " + hangar.spaceAvailable
+puts "Hangar: ¿Tiene Espacio Libre? " + hangar.spaceAvailable.to_s
 puts "Hangar: Vacio " + hangar.to_s
 hangar.addWeapon(weapon1)
 hangar.addWeapon(weapon2)
 hangar.addShieldBooster(shield1)
 hangar.addShieldBooster(shield2)
-hangar.addShieldBooster(shield3)
+hangar.addShieldBooster(shield3)  #Esto ya no lo añade, el máximo son 4 elementos (narmas + nescudos <= 4)
 puts "Hangar: " + hangar.to_s
 hangar.addWeapon(weapon2)
 puts "Hangar: " + hangar.to_s
 hangar.addWeapon(weapon3)
 hangar.addShieldBooster(shield4)
 puts "Hangar: " + hangar.to_s
-puts "Hangar: ¿Tiene Espacio Libre? " + hangar.spaceAvailable
-puts "Hangar: Arma 2 eliminada: " + hangar.removeWeapon(2).to_s
-puts "Hangar: Arma 0 eliminada: " + hangar.removeWeapon(0).to_s
+puts "Hangar: ¿Tiene Espacio Libre? " + hangar.spaceAvailable.to_s
+puts "Hangar: Arma 2 eliminada: " + hangar.removeWeapon(2).to_s #No imprime nada por pantalla ¿No se elimina? 
+puts "Hangar: Arma 0 eliminada: " + hangar.removeWeapon(0).to_s #Esto borra el arma 1
 puts "Hangar: " + hangar.to_s
 puts "Hangar: Arma inexistente eliminada: " + hangar.removeWeapon(4).to_s
 puts "Hangar: Escudo 4 eliminado: " + hangar.removeShieldBooster(4).to_s
 puts "Hangar: " + hangar.to_s
 
 #Prueba Damage1
-puts "Damage1: ¿No Tiene Efecto? " + damage1.hasNoEffect
+puts "Damage1: ¿No Tiene Efecto? " + damage1.hasNoEffect.to_s
 puts "Damage1: " + damage1.to_s
 damage1.discardWeapon(weapon1)
 puts "Damage1: " + damage1.to_s
@@ -114,16 +114,16 @@ damage1.discardShieldBooster
 damage1.discardWeapon(weapon1)
 damage1.discardWeapon(weapon1)
 puts "Damage1: " + damage1.to_s
-puts "Damage1: ¿No Tiene Efecto? " + damage1.hasNoEffect
+puts "Damage1: ¿No Tiene Efecto? " + damage1.hasNoEffect.to_s
 
 #Prueba Damage2
-puts "Damage2: ¿No Tiene Efecto? " + damage2.hasNoEffect
+puts "Damage2: ¿No Tiene Efecto? " + damage2.hasNoEffect.to_s
 puts "Damage2: " + damage2.to_s
 damage2.discardWeapon(weapon1)
 puts "Damage2: " + damage2.to_s
-puts "Damage2: ArrayArmas Posicion PLASMA: " + damage2.arrayContainsType(arrayarmas, WeaponType::PLASMA)
-puts "Damage2: ArrayArmas Posicion MISSILE: " + damage2.arrayContainsType(arrayarmas, WeaponType::MISSILE)
-puts "Damage2: ArrayArmas Posicion LASER: " + damage2.arrayContainsType(arrayarmas, WeaponType::LASER)
+puts "Damage2: ArrayArmas Posicion PLASMA: " + damage2.arrayContainsType(arrayarmas, WeaponType::PLASMA).to_s
+puts "Damage2: ArrayArmas Posicion MISSILE: " + damage2.arrayContainsType(arrayarmas, WeaponType::MISSILE).to_s
+puts "Damage2: ArrayArmas Posicion LASER: " + damage2.arrayContainsType(arrayarmas, WeaponType::LASER).to_s
 #damage2.adjust(arrayarmas, [shield1, shield2])
 damage2.discardWeapon(weapon2)
 damage2.discardWeapon(weapon3)
@@ -131,14 +131,14 @@ damage2.discardShieldBooster
 damage2.discardShieldBooster
 damage2.discardShieldBooster
 puts "Damage2: " + damage2.to_s
-puts "Damage2: ¿No Tiene Efecto? " + damage2.hasNoEffect
+puts "Damage2: ¿No Tiene Efecto? " + damage2.hasNoEffect.to_s
 
 #Prueba EnemyStarShip
 puts "EnemyStarShip: " + naveenemiga.to_s
-puts "EnemyStarShip: Proteccion " + naveenemiga.protection
-puts "EnemyStarShip: Potencia de Fuego " + naveenemiga.fire
-puts "EnemyStarShip: Resultado de Disparo 1" + naveenemiga.receiveShot(1)
-puts "EnemyStarShip: Resultado de Disparo 100" + naveenemiga.receiveShot(100)
+puts "EnemyStarShip: Proteccion " + naveenemiga.protection.to_s
+puts "EnemyStarShip: Potencia de Fuego " + naveenemiga.fire.to_s
+puts "EnemyStarShip: Resultado de Disparo 1" + naveenemiga.receiveShot(1).to_s
+puts "EnemyStarShip: Resultado de Disparo 100" + naveenemiga.receiveShot(100).to_s
 puts "EnemyStarShip: " + naveenemiga.to_s
 
 

@@ -2,7 +2,7 @@
 
 module Deepspace
 
-    class EnemyStarShip
+    class SpaceStation
 
         @@MAXFUEL = 100
         @@SHIELDLOSSPERUNIT = 0.1

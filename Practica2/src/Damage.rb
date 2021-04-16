@@ -61,7 +61,7 @@ module Deepspace
 
       def hasNoEffect
         noeffect = false
-        if @nShields == 0 && ( (@weapons == nil && @nWeapons == 0) || (@nWeapons == NO_USE && @weapons.length == 0) )
+        if @nShields == 0 && ( (@weapons == nil && @nWeapons == 0) || (@nWeapons == @@NO_USE && @weapons.length == 0) )
           noeffect = true
         end
 
@@ -99,11 +99,11 @@ module Deepspace
       def to_s
         out = "NShields: " + nShields.to_s + "\nNWeapons: " + nWeapons.to_s + "\nWeapons:\n"
 
-        i = 0
-            for w in weapons
-                i = i + 1
-                out = out + "\n" + i + w.to_s
-            end
+        if weapons != nil
+          @weapons.each_with_index do |s,i|
+            out += ("\nweapon " + (i+1).to_s + ": " + s.to_s)
+          end
+        end
         
         return out
       end
