@@ -72,8 +72,8 @@ damage2 = Damage.newSpecificWeapons([weapon1, weapon2, weapon3], 3)
 
 naveenemiga = EnemyStarShip.new("nombre", 1, 3, lote, damage1)
 
-#estacionespacial = SpaceStation.new()
-#Prueba SpaceStation
+
+arrayescudos = [shield1, shield2, shield3]
 
 #Prueba GameUniverse
 
@@ -93,11 +93,11 @@ hangar.addWeapon(weapon3)
 hangar.addShieldBooster(shield4)
 puts "Hangar: " + hangar.to_s
 puts "Hangar: ¿Tiene Espacio Libre? " + hangar.spaceAvailable.to_s
-puts "Hangar: Arma 2 eliminada: " + hangar.removeWeapon(2).to_s #No imprime nada por pantalla ¿No se elimina? 
-puts "Hangar: Arma 0 eliminada: " + hangar.removeWeapon(0).to_s #Esto borra el arma 1
+puts "Hangar: Arma 1 eliminada: " + hangar.removeWeapon(1).to_s 
+puts "Hangar: Arma 0 eliminada: " + hangar.removeWeapon(0).to_s 
 puts "Hangar: " + hangar.to_s
 puts "Hangar: Arma inexistente eliminada: " + hangar.removeWeapon(4).to_s
-puts "Hangar: Escudo 4 eliminado: " + hangar.removeShieldBooster(4).to_s
+puts "Hangar: Escudo 4 eliminado: " + hangar.removeShieldBooster(1).to_s
 puts "Hangar: " + hangar.to_s
 
 #Prueba Damage1
@@ -124,7 +124,7 @@ puts "Damage2: " + damage2.to_s
 puts "Damage2: ArrayArmas Posicion PLASMA: " + damage2.arrayContainsType(arrayarmas, WeaponType::PLASMA).to_s
 puts "Damage2: ArrayArmas Posicion MISSILE: " + damage2.arrayContainsType(arrayarmas, WeaponType::MISSILE).to_s
 puts "Damage2: ArrayArmas Posicion LASER: " + damage2.arrayContainsType(arrayarmas, WeaponType::LASER).to_s
-#damage2.adjust(arrayarmas, [shield1, shield2])
+puts "Damage adjust: " + damage2.adjust(arrayarmas, [shield1, shield2]).to_s
 damage2.discardWeapon(weapon2)
 damage2.discardWeapon(weapon3)
 damage2.discardShieldBooster
@@ -141,6 +141,46 @@ puts "EnemyStarShip: Resultado de Disparo 1" + naveenemiga.receiveShot(1).to_s
 puts "EnemyStarShip: Resultado de Disparo 100" + naveenemiga.receiveShot(100).to_s
 puts "EnemyStarShip: " + naveenemiga.to_s
 
+arrayarmas = [weapon1, weapon2, weapon3]
+
+#Prueba SpaceStation
+estacionespacial = SpaceStation.new(1.0, 2.0, "Nombre estación", 10, 23.0, damage1, arrayarmas, arrayescudos,hangar)
+puts "SpaceStation: " + estacionespacial.to_s
+estacionespacial.cleanUpMountedItems
+puts "SpaceStation CleanUp: " + estacionespacial.to_s
+estacionespacial.discardShieldBoosterInHangar(1).to_s
+puts "SpaceStation DiscardShield: " + estacionespacial.to_s
+estacionespacial.discardWeaponInHangar(2)
+puts "SpaceStation DiscardWeapon: " + estacionespacial.to_s
+puts "SpaceStation Speed: " + estacionespacial.speed.to_s
+estacionespacial.mountShieldBooster(0)
+puts "SpaceStation MountShield: " + estacionespacial.to_s
+estacionespacial.mountWeapon(1)
+puts "SpaceStation MountWeapon: " + estacionespacial.to_s
+estacionespacial.move
+puts "SpaceStation Move: " + estacionespacial.to_s
+estacionespacial.discardHangar
+puts "SpaceStation DiscardHangar: " + estacionespacial.to_s
+estacionespacial.receiveHangar(hangar)
+puts "SpaceStation ReceiveHangar: " + estacionespacial.to_s
+estacionespacial.receiveShieldBooster(shield2)
+puts "SpaceStation ReceiveShield: " + estacionespacial.to_s
+estacionespacial.receiveSupplies(paquete2)
+puts "SpaceStation ReceiveSupplies: " + estacionespacial.to_s
+estacionespacialreceiveWeapon(weapon2)
+puts "SpaceStation ReceiveWeapon: " + estacionespacial.to_s
+puts "SpaceStation PendingDamage: " + estacionespacial.to_s
+puts "SpaceStation validState: " + estacionespacial.validState.to_s
+
+
+
+=begin
+/home/pedrojgl/VSCProjects/DeepSpace_ruby/Practica2/src/SpaceStation.rb:46:in `block in cleanUpMountedItems': undefined method `uses' for nil:NilClass (NoMethodError)
+	from /home/pedrojgl/VSCProjects/DeepSpace_ruby/Practica2/src/SpaceStation.rb:45:in `each'
+	from /home/pedrojgl/VSCProjects/DeepSpace_ruby/Practica2/src/SpaceStation.rb:45:in `cleanUpMountedItems'
+	from /home/pedrojgl/VSCProjects/DeepSpace_ruby/Practica2/src/Principal.rb:148:in `<module:Deepspace>'
+	from /home/pedrojgl/VSCProjects/DeepSpace_ruby/Practica2/src/Principal.rb:41:in `<main>'
+=end
 
 
 end #module

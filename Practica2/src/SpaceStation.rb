@@ -29,6 +29,7 @@ module Deepspace
             end
         end
 
+        private
         def cleanPendingDamage
             if @pendingDamage.hasNoEffect
                 @pendingDamage = nil
@@ -41,15 +42,15 @@ module Deepspace
         end
 
         def cleanUpMountedItems
-            for i in 1..@weapons.size
-                if (@weapons.at(i)).uses == 0
+            for i in 0..@weapons.size
+                if (@weapons[i]).uses == 0
                     @weapons.delete_at(i)
                     i = i - 1
                 end
             end
 
-            for i in 1..@shieldBoosters.size
-                if (@shieldBoosters.at(i)).uses == 0
+            for i in 0..@shieldBoosters.size
+                if (@shieldBoosters[i]).uses == 0
                     @shieldBoosters.delete_at(i)
                     i = i - 1
                 end
@@ -194,17 +195,17 @@ module Deepspace
         end
 
         def to_s
-            s = "Name: " + name + "\nAmmoPower = " + ammoPower.to_s + "\nShieldPower = " + shieldPower.to_s + "\nFuelUnits: " + fuelUnits + "\nnMedals: " + nMedals + "\nPendingDamage:  " + pendingDamage.to_s + "\nHangar: " + hangar.to_s + "\nWeapons: "
+            s = "Name: " + name + "\nAmmoPower = " + ammoPower.to_s + "\nShieldPower = " + shieldPower.to_s + "\nFuelUnits: " + fuelUnits.to_s + "\nnMedals: " + nMedals.to_s + "\nPendingDamage:  " + pendingDamage.to_s + "\nHangar: " + hangar.to_s + "\nWeapons: "
             i = 0
             for w in weapons
                 i = i + 1
-                s = s + "\n" + i + w.to_s
+                s = s + "\n" + i.to_s + w.to_s
             end
             
             i = 0
             for sb in shieldBoosters
                 i = i + 1
-                s = s + "\n" + i + wb.to_s
+                s = s + "\n" + i.to_s + sb.to_s
             end
 
             return s
