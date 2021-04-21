@@ -38,7 +38,7 @@ module Deepspace
 
         public
         def self.newSuppliesP(n, supplies)
-            new(supplies.AmmoPower, supplies.fuelUnits, n, 0, supplies.shieldPower, nil, nil, nil, nil)
+            new(supplies.ammoPower, supplies.fuelUnits, n, 0, supplies.shieldPower, nil, nil, nil, nil)
         end
 
         def cleanUpMountedItems
