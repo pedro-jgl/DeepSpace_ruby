@@ -42,6 +42,7 @@ module Deepspace
         end
 
         def cleanUpMountedItems
+=begin
             for i in 0..@weapons.size
                 if (@weapons[i]).uses == 0
                     @weapons.delete_at(i)
@@ -53,6 +54,20 @@ module Deepspace
                 if (@shieldBoosters[i]).uses == 0
                     @shieldBoosters.delete_at(i)
                     i = i - 1
+                end
+            end 
+=end
+            weapons.each_with_index do |arma,i|
+                if arma.uses == 0
+                    weapons.delete_at(i)
+                    i = i -1
+                end
+            end
+
+            shieldBoosters.each_with_index do |escudo,i|
+                if escudo.uses == 0
+                    shieldBoosters.delete_at(i)
+                    i = i -1
                 end
             end
 
