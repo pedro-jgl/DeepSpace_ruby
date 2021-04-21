@@ -167,7 +167,7 @@ estacionespacial.receiveShieldBooster(shield2)
 puts "SpaceStation ReceiveShield: " + estacionespacial.to_s
 estacionespacial.receiveSupplies(paquete2)
 puts "SpaceStation ReceiveSupplies: " + estacionespacial.to_s
-estacionespacialreceiveWeapon(weapon2)
+estacionespacial.receiveWeapon(weapon2)
 puts "SpaceStation ReceiveWeapon: " + estacionespacial.to_s
 puts "SpaceStation PendingDamage: " + estacionespacial.to_s
 puts "SpaceStation validState: " + estacionespacial.validState.to_s
