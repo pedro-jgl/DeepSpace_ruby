@@ -130,7 +130,6 @@ module Deepspace
     def createSpaceStation
       supplies = createSuppliesPackage
       
-      #return SpaceStation.new("DanielsP",supplies[1])
       return SpaceStation.newSuppliesP("DanielsP",supplies[1])
     end
     

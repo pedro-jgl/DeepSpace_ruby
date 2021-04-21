@@ -73,6 +73,7 @@ damage2 = Damage.newSpecificWeapons([weapon1, weapon2, weapon3], 3)
 naveenemiga = EnemyStarShip.new("nombre", 1, 3, lote, damage1)
 
 
+
 arrayescudos = [shield1, shield2, shield3]
 
 #Prueba GameUniverse
