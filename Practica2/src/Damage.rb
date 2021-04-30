@@ -85,15 +85,31 @@ module Deepspace
 
       #Modificar a como está hecha en java (Hay que devolver un damage nuevo y modificar algunas condicionales)
       def adjust(w, s)
+        danio = Damage.newCopy(self)
+
+        if s.size < danio.getNShields
+          danio.nShields = s.size
+        end
+
+        if danio.getNWeapons != @@NO_USE
+          if w.size < danio.getNWeapons
+            danio.nWeapons = w.size
+          end
+        else
         
-        for i in 1..s.length
-          self.discardShieldBooster
+          i=0
+          while i < danio.getWeapons.size do
+            if danio.arrayContainsType(w, danio.getWeapons[i] == -1)
+              danio.weapons.delete_at(i)
+            else
+              i++
+            end
+          
+          end
+        
         end
 
-        w.each do |weap|
-          self.discardWeapon(weap) 
-        end
-
+        return danio
       end
 
       def to_s
