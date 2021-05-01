@@ -84,7 +84,7 @@ if $0 == __FILE__ then
   test.add(TestCard.new(3))
   test.add(TestCard.new(4))
   test.add(TestCard.new(5))
-  for i in 0..15 do
+  for o
     c = test.next
     puts c.a
     puts "[ #{c.b[0]}  ]"

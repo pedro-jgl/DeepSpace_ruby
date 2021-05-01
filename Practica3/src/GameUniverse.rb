@@ -30,18 +30,76 @@ class GameUniverse
   private
   def combatGo(station,enemy)
     #Se implementa en la próxima práctica
+    state = self.getState.state
+    ch = dice.firstShot
+    enemyWins = false
+    moves = false
+    combatResult = CombatResult::NOCOMBAT
+        
+    if state == GameState::BEFORECOMBAT || state == GameState::INIT
+      if ch==GameCharacter::ENEMYSTARSHIP
+        fire = enemy.fire
+        result = station.receiveShot(fire)
+    
+        if result == ShotResult::RESIST
+          fire = station.fire
+          result = enemy.receiveShot(fire)
+    
+          enemyWins = (result == ShotResult::RESIST)
+    
+        else
+          enemyWins = true
+        end
 
+      else
+        fire = station.fire
+        result = enemy.receiveShot(fire)
+        enemyWins = (result == ShotResult::RESIST)
+      end
+
+      if enemyWins
+        s = station.speed
+        moves = dice.spaceStationMoves(s)
+              
+        if !moves
+          damage = enemy.damage
+          station.pendingDamage(damage)
+          combatResult = CombatResult::ENEMYWINS
+        else
+        station.move
+        combatResult = CombatResult::STATIONESCAPES
+        end
+
+      else
+        aLoot = enemy.loot
+        station.setLoot(aLoot)
+        combatResult = CombatResult::STATIONWINS
+      
+        gameState.next(self.turns, self.spaceStations.size)
+      end
+    else
+    combatResult = CombatResult::NOCOMBAT
+    end
+    
+    return combatResult;
   end
 
 
   def combat()
-    #Se implementa en la próxima práctica
+    state = self.getState.state
+    
+        if state == GameState::BEFORECOMBAT || state == GameState::INIT
+          #Así??
+          return combat(currentStation, currentEnemy)
 
+        else
+          return CombatResult::NOCOMBAT
+        end
   end
 
 
   def discardHangar()
-    if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
+    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
         @currentStation.discardHangar 
     end
 
@@ -49,7 +107,7 @@ class GameUniverse
 
 
   def discardShieldBooster(i)
-    if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
+    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
         @currentStation.discardShieldBooster(i) 
     end
 
@@ -57,7 +115,7 @@ class GameUniverse
 
 
   def discardShieldBoosterInHangar(i)
-    if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
+    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
         @currentStation.discardShieldBoosterInHangar(i) 
     end
 
@@ -65,7 +123,7 @@ class GameUniverse
 
 
   def discardWeapon(i)
-    if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
+    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
         @currentStation.discardWeapon(i) 
     end
 
@@ -73,7 +131,7 @@ class GameUniverse
 
 
   def discardWeaponInHangar(i)
-    if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
+    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
         @currentStation.discardWeaponInHangar(i) 
     end
 
@@ -105,7 +163,35 @@ class GameUniverse
 
 
   def init(names)
-    #Se implementa en la próxima práctica
+    state = self.getState.state
+
+      if(state == GameState::CANNOTPLAY){
+        @dealer = CardDealer.instance
+            
+        for i in range(names.size)
+          @supplies = dealer.nextSuppliesPackage
+
+          station = SpaceStation.new(names.get(i), supplies)
+
+
+          #Se modifica station despues de añadirla al array??
+          @spaceStations.add(station)
+
+          nh = dice.initWithNHangar
+          nw = dice.initWithNWeapons
+          ns = dice.initWithNShields
+
+          lo = Loot.new(0, nw, ns, nh, 0)
+
+          station.setLoot(lo)
+        end
+
+          @currentStationIndex = dice.whoStarts(names.size)
+          @currentStation = spaceStations.get(currentStationIndex)
+          @currentEnemy = dealer.nextEnemy
+          @gameState.next(turns, spaceStations.size)
+          
+      end
 
   end
 
@@ -127,7 +213,36 @@ class GameUniverse
 
 
   def nextTurn()
-    #Se implementa en la próxima práctica
+    state = self.getState.state
+
+      if state == GameState::AFTERCOMBAT
+        stationState = currentStation.validState
+
+        if stationState
+          @currentStationIndex = (currentStationIndex + 1)%spaceStations.size
+          @turns += 1
+
+          @currentStation = spaceStations[currentStationIndex]
+          @currentStation.cleanUpMountedItems
+
+          dealer = CardDealer.instance
+
+          @currentEnemy = dealer.nextEnemy
+
+          @gameState.next(turns, spaceStations.size)
+
+          return true
+          
+        else
+          return false
+          
+        end
+
+            
+      else
+        return false
+        
+      end
 
   end
 

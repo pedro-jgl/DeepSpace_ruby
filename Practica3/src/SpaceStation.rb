@@ -77,9 +77,18 @@ module Deepspace
             @hangar = nil
         end
 
-        #def discardShieldBooster(i)
+        def discardShieldBooster(i)
+            if i >= 0 && i < shieldBoosters.size
+                s = @shieldBoosters.delete_at(i)
+                
+                if  pendingDamage != nil
+                    @pendingDamage.discardShieldBooster
+                    
+                    self.cleanPendingDamage
+                end
             
-        #end
+            end
+        end
 
         def discardShieldBoosterInHangar(i)
             if @hangar != nil
@@ -87,9 +96,17 @@ module Deepspace
             end
         end
 
-        #def discardWeapon(i)
+        def discardWeapon(i)
+            if i >= 0 && i < weapons.size
+                w = @weapons.delete_at(i)
+                
+                if  pendingDamage != nil
+                    @pendingDamage.discardWeapon(w)
+                    self.cleanPendingDamage
+                end
             
-        #end
+            end    
+        end
 
         def discardWeaponInHangar(i)
             if @hangar != nil
@@ -97,9 +114,15 @@ module Deepspace
             end
         end
 
-        #def fire
-            
-        #end
+        def fire
+           factor = 1
+
+           for w in weapons
+             factor *= w.useIt
+           end
+
+           return ammoPower*factor
+        end
 
         def ammoPower
             @ammoPower
@@ -157,9 +180,16 @@ module Deepspace
             end
         end
 
-        #def protection
-            
-        #end
+        def protection
+          factor = 1
+
+          for s in shieldBoosters
+                factor *= s.useIt
+          end
+          
+          return shieldPower*factor
+                
+        end
 
         def receiveHangar(h)
             if @hangar == nil
@@ -175,9 +205,20 @@ module Deepspace
             end
         end
 
-        #def receiveShot
+        def receiveShot(shot)
+          myProtection = self.protection
             
-        #end
+          if myProtection >= shot
+            @shieldPower = @shieldPower - @@SHIELDLOSSPERUNIT*shot
+            if @shieldPower < 0.0
+                @shieldPower = 0.0
+            end
+            return ShotResult::RESIST
+          else
+            @shieldPower = 0.0
+            return ShotResult::DONOTRESIST
+          end
+        end
 
         def receiveSupplies(s)
             @ammoPower = @ammoPower + s.ammoPower
@@ -193,9 +234,40 @@ module Deepspace
             end
         end
 
-        #def setLoot(loot)
-            
-        #end
+        def setLoot(loot)
+          dealer = Deepspace::CardDealer.instance
+          h = loot.getNHangars
+
+          if h > 0
+            hangar = dealer.nextHangar
+            receiveHangar(hangar)
+          end
+
+          elements = loot.getNSupplies
+          
+          for i in range(1,elements)
+            sup = dealer.nextSuppliesPackage
+            receiveSupplies(sup)
+          end
+
+          elements = loot.getNWeapons
+          
+          for i in range(1,elements)
+            weap = dealer.nextWeapon
+            receiveWeapon(weap)
+          end
+          
+          elements = loot.getNShields
+          
+          for i in range(1,elements)
+            sh = dealer.nextShieldBooster
+            receiveShieldBooster(sh)
+          end
+
+          medals = loot.getNMedals
+
+          @nMedals += medals
+        end
 
         def pendingDamage=d
             @pendingDamage = d.adjust(@weapons, @shieldBoosters)

@@ -48,7 +48,7 @@ class CardDealer
     end
     
     def nextEnemy() 
-        return @enemies.next();
+        return @enemies.next()
     end
     
     private
@@ -75,6 +75,9 @@ class CardDealer
         @suppliesPackages.add(SuppliesPackage.new(3,50,3))  
         @suppliesPackages.add(SuppliesPackage.new(40,100,40))
         @suppliesPackages.add(SuppliesPackage.new(100,100,100))
+
+        @suppliesPackages.add(SuppliesPackage.new(44,88,23))
+
     end
     
     def createWeapons() 
@@ -104,6 +107,9 @@ class CardDealer
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón mejorado",WeaponType::PLASMA,2))       
        
+
+       @weapons.add(Weapon.new("Cañón nuevo",WeaponType::LASER,3))
+
     end
     
     def createShieldBoosters() 
@@ -118,6 +124,9 @@ class CardDealer
        @shieldBoosters.add(ShieldBooster.new("Escudo ACME",1.5,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",3.0,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",4.0,2))
+
+       @shieldBoosters.add(ShieldBooster.new("Escudo nuevo",8.3,5))
+
     end
                                
     def createHangars() 
@@ -129,6 +138,8 @@ class CardDealer
         @hangars.add(Hangar.new(2))
         @hangars.add(Hangar.new(2))
         @hangars.add(Hangar.new(1))
+        @hangars.add(Hangar.new(1))
+
         @hangars.add(Hangar.new(1))
     end
     
@@ -180,7 +191,10 @@ class CardDealer
         @enemies.add(EnemyStarShip.new("Enemigo difícil 0",200,100,goodLoot,hardSpecificDamage0));          
         @enemies.add(EnemyStarShip.new("Enemigo difícil 1",100,200,goodLoot,hardSpecificDamage0));   
         
-        @enemies.add(EnemyStarShip.new("Enemigo imposible",500,500,goodLoot,hardSpecificDamage0));              
+        @enemies.add(EnemyStarShip.new("Enemigo imposible",500,500,goodLoot,hardSpecificDamage0)); 
+        
+        @enemies.add(EnemyStarShip.new("Enemigo nuevo",44,532,regularLoot0,hardSpecificDamage0));              
+
     end
 end # class
 
