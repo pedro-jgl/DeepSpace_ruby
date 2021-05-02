@@ -165,7 +165,7 @@ class GameUniverse
   def init(names)
     state = self.getState.state
 
-      if(state == GameState::CANNOTPLAY){
+      if(state == GameState::CANNOTPLAY)
         @dealer = CardDealer.instance
             
         for i in range(names.size)
