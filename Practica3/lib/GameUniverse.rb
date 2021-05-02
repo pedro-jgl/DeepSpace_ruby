@@ -1,11 +1,21 @@
 # encoding: utf-8
 
+Directorio = "./"
+Dir[Directorio+"*"].each do |file|
+  file = file[Directorio.size,file.size] 
+  file = file[0,file.size-3]            
+
+  if file != "PlayWithUI" && file != "Controller" && file != "TextMainView" && file != "GameUniverse" && file != "TestP3"
+    require_relative file
+  end
+end
+
 module Deepspace
     
 class GameUniverse
   @@WIN = 10
 
-  def initialize()
+  def initialize
     @dice = Dice.new
     @turns = 0
     @gameState = GameStateController.new
@@ -29,14 +39,13 @@ class GameUniverse
 
   private
   def combatGo(station,enemy)
-    #Se implementa en la próxima práctica
-    state = self.getState.state
+    estado = self.state.state
     ch = dice.firstShot
     enemyWins = false
     moves = false
     combatResult = CombatResult::NOCOMBAT
         
-    if state == GameState::BEFORECOMBAT || state == GameState::INIT
+    if estado == GameState::BEFORECOMBAT || estado == GameState::INIT
       if ch==GameCharacter::ENEMYSTARSHIP
         fire = enemy.fire
         result = station.receiveShot(fire)
@@ -63,7 +72,7 @@ class GameUniverse
               
         if !moves
           damage = enemy.damage
-          station.pendingDamage(damage)
+          station.pendingDamage=damage
           combatResult = CombatResult::ENEMYWINS
         else
         station.move
@@ -84,13 +93,13 @@ class GameUniverse
     return combatResult;
   end
 
-
+  public
   def combat()
-    state = self.getState.state
+    estado = self.state.state
     
-        if state == GameState::BEFORECOMBAT || state == GameState::INIT
+        if estado == GameState::BEFORECOMBAT || estado == GameState::INIT
           #Así??
-          return combat(currentStation, currentEnemy)
+          return combatGo(currentStation, currentEnemy)
 
         else
           return CombatResult::NOCOMBAT
@@ -99,7 +108,7 @@ class GameUniverse
 
 
   def discardHangar()
-    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
+    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
         @currentStation.discardHangar 
     end
 
@@ -107,7 +116,7 @@ class GameUniverse
 
 
   def discardShieldBooster(i)
-    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
+    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
         @currentStation.discardShieldBooster(i) 
     end
 
@@ -115,7 +124,7 @@ class GameUniverse
 
 
   def discardShieldBoosterInHangar(i)
-    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
+    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
         @currentStation.discardShieldBoosterInHangar(i) 
     end
 
@@ -123,7 +132,7 @@ class GameUniverse
 
 
   def discardWeapon(i)
-    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
+    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
         @currentStation.discardWeapon(i) 
     end
 
@@ -131,21 +140,21 @@ class GameUniverse
 
 
   def discardWeaponInHangar(i)
-    if (self.getState.state == GameState::INIT or self.getState.state == GameState::AFTERCOMBAT)
+    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
         @currentStation.discardWeaponInHangar(i) 
     end
 
   end
 
 
-  def getState()
+  def state()
     @gameState
 
   end
   
 
   def getUIversion()
-    GameUniverseToUI.new(self) #??
+    GameUniverseToUI.new(currentStation, currentEnemy) #??
 
   end
 
@@ -163,32 +172,31 @@ class GameUniverse
 
 
   def init(names)
-    state = self.getState.state
+    estado = self.state.state
 
-      if(state == GameState::CANNOTPLAY)
+      if(estado == GameState::CANNOTPLAY)
         @dealer = CardDealer.instance
             
-        for i in range(names.size)
-          @supplies = dealer.nextSuppliesPackage
+        for i in 0..names.size
+          @supplies = @dealer.nextSuppliesPackage
 
-          station = SpaceStation.new(names.get(i), supplies)
+          station = SpaceStation.newSuppliesP(names[i], @supplies)
 
-
-          #Se modifica station despues de añadirla al array??
-          @spaceStations.add(station)
-
-          nh = dice.initWithNHangar
+          nh = dice.initWithNHangars
           nw = dice.initWithNWeapons
           ns = dice.initWithNShields
 
           lo = Loot.new(0, nw, ns, nh, 0)
 
           station.setLoot(lo)
+          
+          @spaceStations.push(station)
+
         end
 
           @currentStationIndex = dice.whoStarts(names.size)
-          @currentStation = spaceStations.get(currentStationIndex)
-          @currentEnemy = dealer.nextEnemy
+          @currentStation = spaceStations[currentStationIndex]
+          @currentEnemy = @dealer.nextEnemy
           @gameState.next(turns, spaceStations.size)
           
       end
@@ -197,7 +205,7 @@ class GameUniverse
 
   
   def mountShieldBooster(i)
-    if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
+    if (self.state == GameState::INIT or self.state == GameState::AFTERCOMBAT)
         @currentStation.mountShieldBooster(i)
     end
 
@@ -205,7 +213,7 @@ class GameUniverse
 
 
   def mountWeapon(i)
-    if (self.getState == GameState::INIT or self.getState == GameState::AFTERCOMBAT)
+    if (self.state == GameState::INIT or self.state == GameState::AFTERCOMBAT)
         @currentStation.mountWeapon(i)
     end
 
@@ -213,7 +221,7 @@ class GameUniverse
 
 
   def nextTurn()
-    state = self.getState.state
+    state = self.state.state
 
       if state == GameState::AFTERCOMBAT
         stationState = currentStation.validState
@@ -246,11 +254,10 @@ class GameUniverse
 
   end
 
-
-  def to_s()
+  
+  def to_s
     cadena = "CurrentSpaceStation: " + @currentStation.to_s + "\nCurrentSpaceStationIndex: " + @currentStationIndex.to_s  + "\nTurns: " + @turns.to_s + "\nCurrentEnemy: " + @currentEnemy.to_s + "\nDice: " + @dice.to_s + "\nGameStateController: " + gameState.to_s + "\nArray de SpaceStation: "
 
-    #En caso de que sirva, dejar los demás for que indiquen también índices como este
     @spaceStations.each_with_index do |s,i|
       cadena += ("\nSpaceStation " + (i+1).to_s + ": " + s.to_s)
     

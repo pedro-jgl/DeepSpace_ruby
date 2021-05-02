@@ -38,8 +38,8 @@ class Loot
     return out
   end
 
-  def getUIVersion
-    return LootToUI.newCopy(this)
+  def getUIversion
+    return LootToUI.new(self)
   end
   
 end #class

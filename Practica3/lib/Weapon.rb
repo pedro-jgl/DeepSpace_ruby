@@ -49,8 +49,8 @@ class Weapon
     return out
   end
   
-  def getUIVersion
-    return WeaponToUI.newCopy(this)
+  def getUIversion
+    return WeaponToUI.new(self)
   end
 
 end #classs

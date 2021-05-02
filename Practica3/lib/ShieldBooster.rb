@@ -41,8 +41,8 @@ class ShieldBooster
     return out
   end
 
-  def getUIVersion
-    return ShieldToUI.newCopy(this)
+  def getUIversion
+    return ShieldToUI.new(self)
   end
   
 end #class

@@ -15,14 +15,10 @@ module Deepspace
       def self.newCopy(d)
         new(d.nWeapons, d.nShields, d.weapons)
       end
-      
-      def nWeapons
-        return @nWeapons
-      end
 
-      def nShields
-        return @nShields          
-      end
+      attr_accessor :nWeapons
+      
+      attr_accessor :nShields
 
       def weapons
         return @weapons
@@ -69,42 +65,57 @@ module Deepspace
       end
     
       #bien?¿
+      private
       def arrayContainsType(w, t)
         count = 0
         
-        w.each do |weap|
-          if weap == t 
-            return count  
-          else
-            count = count + 1
+        if w != nil
+          w.each do |weap|
+            if weap == t 
+              return count  
+            else
+              count = count + 1
+            end
           end
         end
 
         return -1
       end
 
-      
+      public
       def adjust(w, s)
         danio = Damage.newCopy(self)
         
-        if s.size < danio.nShields
-          danio.nShields = s.size
+        if s != nil
+          if s.size < danio.nShields
+            danio.nShields = s.size
+          end
+        else
+          danio.nShields = 0
         end
 
-        if danio.nWeapons != NO_USE
-          if w.size < danio.nWeapons
-            danio.nWeapons = w.size
+        if danio.nWeapons != @@NO_USE
+          if w != nil
+            if w.size < danio.nWeapons
+              danio.nWeapons = w.size
+            end
+          else
+            danio.nWeapons = 0
           end
-
+          
         else
           i = 0
           copiaw = []
-          w.each do |weap|
-            copiaw.push(weap)
+          if w == nil
+            copiaw = []
+          else
+            w.each do |weap|
+              copiaw.push(weap)
+            end
           end
 
           while i < danio.weapons.size
-            indice = arrayContainsType(w, danio.getWeapons().get(i))
+            indice = arrayContainsType(w, danio.weapons[i])
             if indice == -1
               danio.weapons.delete_at(i)
             else
@@ -132,7 +143,7 @@ module Deepspace
         return out
       end
 
-      def getUIVersion
+      def getUIversion
         DamageToUI.new(self) #???
       end
 

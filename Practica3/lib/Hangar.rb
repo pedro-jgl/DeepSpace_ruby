@@ -13,21 +13,21 @@ class Hangar
 
 
   def self.newCopy(s)
-    new(s.getMaxElements)
+    new(s.maxElements)
 
   end
 
 
-  def getUIVersion
+  def getUIversion
     HangarToUI.new(self) #???
   end
 
-
+  private
   def spaceAvailable
     hayespacio = true
     ocupado = @shieldBoosters.count + @weapons.count
 
-    if ocupado == getMaxElements
+    if ocupado == maxElements
         hayespacio = false
     end
 
@@ -35,7 +35,7 @@ class Hangar
 
   end
 
-
+  public
   def addWeapon(w)
     aniadido = true
 
@@ -64,19 +64,19 @@ class Hangar
   end
 
 
-  def getMaxElements
+  def maxElements
     return @maxElements
 
   end
 
 
-  def getShieldBoosters
+  def shieldBoosters
     return @shieldBoosters
 
   end
 
 
-  def getWeapons
+  def weapons
     return @weapons
 
   end
@@ -96,7 +96,7 @@ class Hangar
   end
 
   def to_s
-    out = "El máximo de elementos del Hangar: " + getMaxElements.to_s + " weapons: " + getWeapons.to_s + " shields: " + getShieldBoosters.to_s
+    out = "El máximo de elementos del Hangar: " + maxElements.to_s + " weapons: " + weapons.to_s + " shields: " + shieldBoosters.to_s
     return out
   end
 

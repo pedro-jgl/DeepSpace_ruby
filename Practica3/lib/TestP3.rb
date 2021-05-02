@@ -130,7 +130,7 @@ module Deepspace
     def createSpaceStation
       supplies = createSuppliesPackage
       
-      return SpaceStation.new("DanielsP",supplies[1])
+      return SpaceStation.newSuppliesP("DanielsP",supplies[1])
     end
     
     #==========================================================================
@@ -242,7 +242,7 @@ module Deepspace
       puts "--> SHIELDS MONTADOS : #{@spaceStation.shieldBoosters.length}"
       
       puts "\n--> RECIBIENDO DAMAGE : \n#{@damageSpecific[1].to_s}"
-      @spaceStation.setPendingDamage(Damage.newCopy(@damageSpecific[1]))
+      @spaceStation.pendingDamage=Damage.newCopy(@damageSpecific[1])
       puts "\n--> ESTADO ACTUAL SPACESTATION: \n#{@spaceStation.to_s}"
       
       puts "\n--> DESCARTANDO MISSILE..."

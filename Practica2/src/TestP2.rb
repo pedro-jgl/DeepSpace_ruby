@@ -908,14 +908,14 @@ module Deepspace
       
       titleTest(index,object,section)
       puts "--> DAMAGE A RECIBIR : \n#{@damageSpecific[0].to_s}"
-      @spaceStation.setPendingDamage(@damageSpecific[0])
+      @spaceStation.pendingDamage = @damageSpecific[0]
       
       puts "\n--> ESTADO ACTUAL DE SPACESTATION \n#{@spaceStation.to_s}"
       
       puts "\n--> ESTADO VALIDO SPACESTATION ? #{@spaceStation.validState}"
       
       puts "\n--> DAMAGE A RECIBIR : \n#{@damageSpecific[4].to_s}"
-      @spaceStation.setPendingDamage(@damageSpecific[4])
+      @spaceStation.pendingDamage = @damageSpecific[4]
       
       puts "\n--> ESTADO ACTUAL DE SPACESTATION \n#{@spaceStation.to_s}"
       
