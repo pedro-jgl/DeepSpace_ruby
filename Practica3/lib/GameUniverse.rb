@@ -96,7 +96,6 @@ class GameUniverse
     estado = self.state
     
         if estado == GameState::BEFORECOMBAT || estado == GameState::INIT
-          #Así??
           return combatGo(currentStation, currentEnemy)
 
         else
@@ -160,10 +159,10 @@ class GameUniverse
 
 
   def haveAWinner()
-    win = False 
+    win = false 
 
-    if @currentStation.nMedals == WIN
-        win = True 
+    if @currentStation.nMedals == @@WIN
+        win = true 
     end
     
     return win
@@ -201,7 +200,7 @@ class GameUniverse
           @currentStationIndex = dice.whoStarts(names.size)
           @currentStation = spaceStations[currentStationIndex]
           @currentEnemy = @dealer.nextEnemy
-          @gameState.next(turns, names.size)
+          @gameState.next(turns, spaceStations.size)
           
       end
 
@@ -225,37 +224,29 @@ class GameUniverse
 
 
   def nextTurn()
-    state = self.state.state
+    estado = self.state
 
-      if state == GameState::AFTERCOMBAT
+      if estado == GameState::AFTERCOMBAT
         stationState = currentStation.validState
 
         if stationState
-          @currentStationIndex = (currentStationIndex + 1)%spaceStations.size
+          @currentStationIndex = (@currentStationIndex + 1)% @spaceStations.size
           @turns += 1
 
-          @currentStation = spaceStations[currentStationIndex]
+          @currentStation = @spaceStations[currentStationIndex]
           @currentStation.cleanUpMountedItems
 
           dealer = CardDealer.instance
 
           @currentEnemy = dealer.nextEnemy
 
-          @gameState.next(turns, spaceStations.size)
+          @gameState.next(@turns, @spaceStations.size)
 
-          return true
-          
-        else
-          return false
-          
+          return true          
         end
-
-            
-      else
         return false
-        
       end
-
+      return false
   end
 
   
