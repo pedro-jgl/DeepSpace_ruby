@@ -16,15 +16,13 @@ class GameUniverse
   @@WIN = 10
 
   def initialize
-    @dice = Dice.new
+    @currentStationIndex = -1
     @turns = 0
     @gameState = GameStateController.new
-
-    #Creo que hay que hacer esto aunque no se especifique
-    @currentStation = nil
-    @currentStationIndex = nil
-    @currentEnemy = nil
-    @spaceStations = Array.new()
+    @currentEnemy
+    @dice = Dice.new
+    @currentStation = 0
+    @spaceStations = Array.new
 
   end
 
@@ -39,7 +37,7 @@ class GameUniverse
 
   private
   def combatGo(station,enemy)
-    estado = self.state.state
+    estado = self.state
     ch = dice.firstShot
     enemyWins = false
     moves = false
@@ -95,7 +93,7 @@ class GameUniverse
 
   public
   def combat()
-    estado = self.state.state
+    estado = self.state
     
         if estado == GameState::BEFORECOMBAT || estado == GameState::INIT
           #Así??
@@ -108,7 +106,7 @@ class GameUniverse
 
 
   def discardHangar()
-    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
+    if (self.state == GameState::INIT or self.state == GameState::AFTERCOMBAT)
         @currentStation.discardHangar 
     end
 
@@ -116,7 +114,7 @@ class GameUniverse
 
 
   def discardShieldBooster(i)
-    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
+    if (self.state == GameState::INIT or self.state == GameState::AFTERCOMBAT)
         @currentStation.discardShieldBooster(i) 
     end
 
@@ -124,7 +122,7 @@ class GameUniverse
 
 
   def discardShieldBoosterInHangar(i)
-    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
+    if (self.state == GameState::INIT or self.state == GameState::AFTERCOMBAT)
         @currentStation.discardShieldBoosterInHangar(i) 
     end
 
@@ -132,7 +130,7 @@ class GameUniverse
 
 
   def discardWeapon(i)
-    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
+    if (self.state == GameState::INIT or self.state == GameState::AFTERCOMBAT)
         @currentStation.discardWeapon(i) 
     end
 
@@ -140,18 +138,20 @@ class GameUniverse
 
 
   def discardWeaponInHangar(i)
-    if (self.state.state == GameState::INIT or self.state.state == GameState::AFTERCOMBAT)
+    if (self.state == GameState::INIT or self.state == GameState::AFTERCOMBAT)
         @currentStation.discardWeaponInHangar(i) 
     end
 
   end
 
-
   def state()
-    @gameState
+    @gameState.state
 
   end
   
+  def gameState
+    @gameState
+  end
 
   def getUIversion()
     GameUniverseToUI.new(currentStation, currentEnemy) #??
@@ -172,9 +172,9 @@ class GameUniverse
 
 
   def init(names)
-    estado = self.state.state
+    estado = state
 
-      if(estado == GameState::CANNOTPLAY)
+      if estado == GameState::CANNOTPLAY
         @dealer = CardDealer.instance
             
         for i in 0..names.size
@@ -190,6 +190,10 @@ class GameUniverse
 
           station.setLoot(lo)
           
+          if @spaceStations == nil
+            @spaceStations = []
+          end
+
           @spaceStations.push(station)
 
         end
@@ -197,7 +201,7 @@ class GameUniverse
           @currentStationIndex = dice.whoStarts(names.size)
           @currentStation = spaceStations[currentStationIndex]
           @currentEnemy = @dealer.nextEnemy
-          @gameState.next(turns, spaceStations.size)
+          @gameState.next(turns, names.size)
           
       end
 
