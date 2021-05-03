@@ -290,21 +290,21 @@ module Deepspace
 
           elements = loot.nSupplies
           
-          for i in 1..elements
+          for i in (1..elements)
             sup = dealer.nextSuppliesPackage
             receiveSupplies(sup)
           end
 
           elements = loot.nWeapons
           
-          for i in 1..elements
+          for i in (1..elements)
             weap = dealer.nextWeapon
             receiveWeapon(weap)
           end
           
           elements = loot.nShields
           
-          for i in 1..elements
+          for i in (1..elements)
             sh = dealer.nextShieldBooster
             receiveShieldBooster(sh)
           end
@@ -319,11 +319,11 @@ module Deepspace
         end
 
         def validState
-            if @pendingDamage == nil || @pendingDamage.hasNoEffect
+            if @pendingDamage == nil 
                 return true
-            else
-                return false
             end
+            
+            return @pendingDamage.hasNoEffect
         end
 
         def to_s

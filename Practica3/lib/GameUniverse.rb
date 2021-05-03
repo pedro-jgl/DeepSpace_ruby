@@ -73,8 +73,8 @@ class GameUniverse
           station.pendingDamage=damage
           combatResult = CombatResult::ENEMYWINS
         else
-        station.move
-        combatResult = CombatResult::STATIONESCAPES
+          station.move
+          combatResult = CombatResult::STATIONESCAPES
         end
 
       else
@@ -85,7 +85,7 @@ class GameUniverse
         gameState.next(self.turns, self.spaceStations.size)
       end
     else
-    combatResult = CombatResult::NOCOMBAT
+      combatResult = CombatResult::NOCOMBAT
     end
     
     return combatResult;
@@ -153,6 +153,15 @@ class GameUniverse
   end
 
   def getUIversion()
+    if currentStation == nil
+      sup = SuppliesPackage.new(0,0,0)
+      @currentStation = SpaceStation.newSuppliesP("",sup)
+    end
+    if currentEnemy == nil
+      sup = SuppliesPackage.new(0,0,0)
+      @currentEnemy = SpaceStation.newSuppliesP("",sup)
+
+    end
     GameUniverseToUI.new(currentStation, currentEnemy) #??
 
   end
@@ -171,13 +180,13 @@ class GameUniverse
 
 
   def init(names)
-    estado = state
+    estado = self.state
+    size = names.length
 
       if estado == GameState::CANNOTPLAY
-        @dealer = CardDealer.instance
-            
-        for i in 0..names.size
-          @supplies = @dealer.nextSuppliesPackage
+        dealer = CardDealer.instance
+        for i in (0..size-1)
+          @supplies = dealer.nextSuppliesPackage
 
           station = SpaceStation.newSuppliesP(names[i], @supplies)
 
@@ -197,10 +206,10 @@ class GameUniverse
 
         end
 
-          @currentStationIndex = dice.whoStarts(names.size)
-          @currentStation = spaceStations[currentStationIndex]
-          @currentEnemy = @dealer.nextEnemy
-          @gameState.next(turns, spaceStations.size)
+          @currentStationIndex = dice.whoStarts(size)
+          @currentStation = spaceStations[@currentStationIndex]
+          @currentEnemy = dealer.nextEnemy
+          @gameState.next(turns, size)
           
       end
 

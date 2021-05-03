@@ -19,6 +19,13 @@ class Hangar
 
 
   def getUIversion
+    if @weapons == nil
+      @weapons = []
+    end
+    if @shieldBoosters == nil
+      @shieldBoosters = []
+    end
+    
     HangarToUI.new(self) #???
   end
 

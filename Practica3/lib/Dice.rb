@@ -53,7 +53,6 @@ class Dice
 
   def whoStarts(nPlayers)
     @generator = rand(nPlayers)
-    @generator += 1
     return @generator
   end
 

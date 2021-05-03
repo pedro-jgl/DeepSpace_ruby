@@ -113,16 +113,18 @@ module Deepspace
               copiaw.push(weap)
             end
           end
+          
+          if danio.weapons != nil
+            while i < danio.weapons.size
+              indice = arrayContainsType(w, danio.weapons[i])
+              if indice == -1
+                danio.weapons.delete_at(i)
+              else
+                copiaw.delete_at(indice)
+                i += 1
+              end
 
-          while i < danio.weapons.size
-            indice = arrayContainsType(w, danio.weapons[i])
-            if indice == -1
-              danio.weapons.delete_at(i)
-            else
-              copiaw.delete_at(indice)
-              i += 1
             end
-
           end
 
         end
@@ -140,10 +142,13 @@ module Deepspace
           end
         end
         
-        return out
+        return
       end
 
       def getUIversion
+        if @weapons == nil
+          @weapons = []
+        end
         DamageToUI.new(self) #???
       end
 

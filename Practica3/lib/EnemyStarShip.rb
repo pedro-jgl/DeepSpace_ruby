@@ -22,7 +22,6 @@ class EnemyStarShip
 
   def getUIversion
     EnemyToUI.new(self) #???
-
   end
 
 
