@@ -1,4 +1,13 @@
 # encoding: utf-8
+require_relative 'SpaceStationToUI'
+require_relative 'SuppliesPackage'
+require_relative 'Hangar'
+require_relative 'Weapon'
+require_relative 'WeaponType'
+require_relative 'ShieldBooster'
+require_relative 'Damage'
+require_relative 'Loot'
+require_relative 'CardDealer'
 
 module Deepspace
 
@@ -29,7 +38,7 @@ module Deepspace
             end
         end
 
-        #private sigue?
+        private
         def cleanPendingDamage
             if @pendingDamage.hasNoEffect
                 @pendingDamage = nil
@@ -38,7 +47,7 @@ module Deepspace
 
         public
         def self.newSuppliesP(n, supplies)
-            new(supplies.ammoPower, supplies.fuelUnits, n, 0, supplies.shieldPower, nil, nil, nil, nil)
+            new(supplies.ammoPower, supplies.fuelUnits, n, 0, supplies.shieldPower, nil, Array.new, Array.new, nil)
         end
 
         def cleanUpMountedItems
@@ -49,7 +58,6 @@ module Deepspace
                     i = i - 1
                 end
             end
-
             for i in 0..@shieldBoosters.size
                 if (@shieldBoosters[i]).uses == 0
                     @shieldBoosters.delete_at(i)
@@ -57,28 +65,22 @@ module Deepspace
                 end
             end 
 =end
-            if weapons == nil
-                @weapons = []
-            end
-
-            weapons.each_with_index do |arma,i|
-                if arma.uses == 0
-                    weapons.delete_at(i)
-                    i = i -1
+            if weapons != nil            
+                weapons.each_with_index do |arma,i|
+                    if arma.uses == 0
+                        weapons.delete_at(i)
+                        i = i -1
+                    end
                 end
             end
-
-            if shieldBoosters == nil
-                @shieldBoosters = []
-            end
-
-            shieldBoosters.each_with_index do |escudo,i|
-                if escudo.uses == 0
-                    shieldBoosters.delete_at(i)
-                    i = i -1
+            if shieldBoosters != nil
+                shieldBoosters.each_with_index do |escudo,i|
+                    if escudo.uses == 0
+                        shieldBoosters.delete_at(i)
+                        i = i -1
+                    end
                 end
             end
-
         end
 
         def discardHangar
@@ -93,7 +95,7 @@ module Deepspace
             if i >= 0 && i < shieldBoosters.size
                 s = @shieldBoosters.delete_at(i)
                 
-                if  pendingDamage != nil
+                if  @pendingDamage != nil
                     @pendingDamage.discardShieldBooster
                     
                     self.cleanPendingDamage
@@ -115,7 +117,7 @@ module Deepspace
             if i >= 0 && i < weapons.size
                 w = @weapons.delete_at(i)
                 
-                if  pendingDamage != nil
+                if  @pendingDamage != nil
                     @pendingDamage.discardWeapon(w)
                     self.cleanPendingDamage
                 end
@@ -296,7 +298,7 @@ module Deepspace
           end
 
           elements = loot.nWeapons
-          
+
           for i in (1..elements)
             weap = dealer.nextWeapon
             receiveWeapon(weap)
@@ -314,12 +316,12 @@ module Deepspace
           @nMedals += medals
         end
 
-        def pendingDamage=d
+        def setPendingDamage(d) #=d
             @pendingDamage = d.adjust(@weapons, @shieldBoosters)
         end
-
+        
         def validState
-            if @pendingDamage == nil 
+            if pendingDamage == nil 
                 return true
             end
             

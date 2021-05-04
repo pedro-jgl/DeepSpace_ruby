@@ -37,7 +37,7 @@ class Dice
       return 2
             
     end
-        
+    
   end
     
   def initWithNShields
@@ -52,8 +52,7 @@ class Dice
   end
 
   def whoStarts(nPlayers)
-    @generator = rand(nPlayers)
-    return @generator
+    rand(nPlayers)
   end
 
   def firstShot

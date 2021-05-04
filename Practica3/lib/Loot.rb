@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+require_relative 'LootToUI'
 module Deepspace
 
 class Loot

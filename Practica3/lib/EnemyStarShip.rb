@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+require_relative 'EnemyToUI'
 module Deepspace
 
 class EnemyStarShip

@@ -1,4 +1,5 @@
 # encoding: utf-8
+require_relative 'DamageToUI'
 
 module Deepspace
 
@@ -33,20 +34,14 @@ module Deepspace
       end
 
       def discardWeapon(w)
-        if @weapons != nil
-    
-          @weapons.each do |weap|
-            #solucionar coincidencias, por ahora borra todos los que coincidan
-            #usar arrayContainsType?¿
-            if weap == w
-              @weapons.delete(w)
-            end
+        if(@weapons == nil && @nWeapons > 0)
+          @nWeapons-=1	
+        else
+          index = @weapons.index(w.type)
+          if index != nil
+            @weapons.delete_at(index)
           end
-
-        elsif @nWeapons != 0
-          @nWeapons = @nWeapons - 1
         end
-        
       end
 
       def discardShieldBooster
@@ -146,9 +141,6 @@ module Deepspace
       end
 
       def getUIversion
-        if @weapons == nil
-          @weapons = []
-        end
         DamageToUI.new(self) #???
       end
 

@@ -1,14 +1,13 @@
 # encoding: utf-8
-
-Directorio = "./"
-Dir[Directorio+"*"].each do |file|
-  file = file[Directorio.size,file.size] 
-  file = file[0,file.size-3]            
-
-  if file != "PlayWithUI" && file != "Controller" && file != "TextMainView" && file != "GameUniverse" && file != "TestP3"
-    require_relative file
-  end
-end
+require_relative 'GameUniverseToUI'
+require_relative 'SpaceStation'
+require_relative 'GameStateController'
+require_relative 'EnemyStarShip'
+require_relative 'Dice'
+require_relative 'ShotResult'
+require_relative 'CombatResult'
+require_relative 'GameCharacter'
+require_relative 'CardDealer'
 
 module Deepspace
     
@@ -37,58 +36,46 @@ class GameUniverse
 
   private
   def combatGo(station,enemy)
-    estado = self.state
     ch = dice.firstShot
     enemyWins = false
     moves = false
     combatResult = CombatResult::NOCOMBAT
-        
-    if estado == GameState::BEFORECOMBAT || estado == GameState::INIT
-      if ch==GameCharacter::ENEMYSTARSHIP
-        fire = enemy.fire
-        result = station.receiveShot(fire)
-    
-        if result == ShotResult::RESIST
-          fire = station.fire
-          result = enemy.receiveShot(fire)
-    
-          enemyWins = (result == ShotResult::RESIST)
-    
-        else
-          enemyWins = true
-        end
-
-      else
+    if ch == GameCharacter::ENEMYSTARSHIP
+      fire = enemy.fire
+      result = station.receiveShot(fire)
+      if result == ShotResult::RESIST
         fire = station.fire
         result = enemy.receiveShot(fire)
         enemyWins = (result == ShotResult::RESIST)
-      end
-
-      if enemyWins
-        s = station.speed
-        moves = dice.spaceStationMoves(s)
-              
-        if !moves
-          damage = enemy.damage
-          station.pendingDamage=damage
-          combatResult = CombatResult::ENEMYWINS
-        else
-          station.move
-          combatResult = CombatResult::STATIONESCAPES
-        end
-
       else
-        aLoot = enemy.loot
-        station.setLoot(aLoot)
-        combatResult = CombatResult::STATIONWINS
-      
-        gameState.next(self.turns, self.spaceStations.size)
+        enemyWins = true
       end
     else
-      combatResult = CombatResult::NOCOMBAT
+      fire = station.fire
+      result = enemy.receiveShot(fire)
+      enemyWins = (result == ShotResult::RESIST)
     end
     
-    return combatResult;
+    if enemyWins
+      s = station.speed
+      moves = dice.spaceStationMoves(s)
+      if !moves
+        damage = enemy.damage
+        station.setPendingDamage(damage)
+        combatResult = CombatResult::ENEMYWINS
+      else
+        station.move
+        combatResult = CombatResult::STATIONESCAPES
+      end
+    else
+      aLoot = enemy.loot
+      station.setLoot(aLoot)
+      combatResult = CombatResult::STATIONWINS
+    end
+    
+    gameState.next(self.turns, self.spaceStations.size)
+    
+    return combatResult
   end
 
   public
@@ -170,7 +157,7 @@ class GameUniverse
   def haveAWinner()
     win = false 
 
-    if @currentStation.nMedals == @@WIN
+    if @currentStation.nMedals >= @@WIN
         win = true 
     end
     
@@ -233,25 +220,19 @@ class GameUniverse
 
 
   def nextTurn()
-    estado = self.state
-
-      if estado == GameState::AFTERCOMBAT
-        stationState = currentStation.validState
-
-        if stationState
-          @currentStationIndex = (@currentStationIndex + 1)% @spaceStations.size
-          @turns += 1
-
-          @currentStation = @spaceStations[currentStationIndex]
+    state = @gameState.state
+      if state == Deepspace::GameState::AFTERCOMBAT
+        stationState = @currentStation.validState
+        if(stationState)
+          @currentStationIndex=(@currentStationIndex+1) % @spaceStations.length
+          @currentStation=@spaceStations[@currentStationIndex]
+          @turns+=1
           @currentStation.cleanUpMountedItems
-
           dealer = CardDealer.instance
-
           @currentEnemy = dealer.nextEnemy
-
-          @gameState.next(@turns, @spaceStations.size)
-
-          return true          
+          @gameState.next(@turns, @spaceStations.length)
+          
+          return true
         end
         return false
       end

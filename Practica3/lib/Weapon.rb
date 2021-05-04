@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 require_relative 'WeaponType'
-
+require_relative 'WeaponToUI'
 module Deepspace
 
 class Weapon 
