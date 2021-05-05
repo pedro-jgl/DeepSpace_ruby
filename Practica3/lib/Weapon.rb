@@ -45,7 +45,7 @@ class Weapon
   end
 
   def to_s
-    out = "Name: " + name + "\nType: " + type().to_s + "\nPower: " + power().to_s + "\nUses: " + uses().to_s
+    out = "Name: " + name + "\nType: " + type.to_s + "\nPower: " + power.to_s + "\nUses: " + uses.to_s
     return out
   end
   

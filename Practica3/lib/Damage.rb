@@ -137,15 +137,15 @@ module Deepspace
 
         if weapons != nil
           @weapons.each_with_index do |s,i|
-            out += ("\nweapon " + (i+1).to_s + ": " + s.to_s)
+            out += ("weapon " + (i+1).to_s + ": \n" + s.to_s + "\n")
           end
         end
         
-        return
+        return out
       end
 
       def getUIversion
-        DamageToUI.new(self) #???
+        DamageToUI.new(self) 
       end
 
     end
