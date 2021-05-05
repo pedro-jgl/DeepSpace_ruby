@@ -13,9 +13,9 @@ module Deepspace
       end
 
       def to_s
-        if self == Deepspace::WeaponType::LASER
+        if self == WeaponType::LASER
           return "LASER"
-        elsif self == Deepspace::WeaponType::MISSILE
+        elsif self == WeaponType::MISSILE
           return "MISSILE"
         else
           return "PLASMA"
