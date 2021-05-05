@@ -58,24 +58,27 @@ module Deepspace
 
         return noeffect
       end
-    
-      #bien?¿
+
       private
-      def arrayContainsType(w, t)
-        count = 0
-        
+      def arrayContainsType(w,t)
+        index = -1
+        wt = Array.new    #array de los types de w
+
         if w != nil
           w.each do |weap|
-            if weap == t 
-              return count  
-            else
-              count = count + 1
-            end
+            wt.append(weap.type)
           end
+
+          index = wt.index(t)   #Si no lo encuentra devuelve nil
         end
 
-        return -1
+        if index == nil
+          index = -1
+        end
+
+        return index
       end
+
 
       public
       def adjust(w, s)
@@ -111,7 +114,7 @@ module Deepspace
           
           if danio.weapons != nil
             while i < danio.weapons.size
-              indice = arrayContainsType(w, danio.weapons[i])
+              indice = arrayContainsType(copiaw, danio.weapons[i].type)
               if indice == -1
                 danio.weapons.delete_at(i)
               else
@@ -127,6 +130,7 @@ module Deepspace
         return danio
 
       end
+
 
       def to_s
         out = "NShields: " + nShields.to_s + "\nNWeapons: " + nWeapons.to_s + "\nWeapons:\n"
