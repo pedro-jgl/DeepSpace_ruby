@@ -362,7 +362,7 @@ module Deepspace
             if weapons != nil
               for w in weapons
                 i = i + 1
-                s = s + "\n" + i.to_s + w.to_s
+                s = s + "\n" + i.to_s + " " + w.to_s
               end
             end
             
@@ -370,7 +370,7 @@ module Deepspace
             if shieldBoosters != nil
                 for sb in shieldBoosters
                     i = i + 1
-                    s = s + "\n" + i.to_s + sb.to_s
+                    s = s + "\n" + i.to_s + " " + sb.to_s
                 end
             end
 

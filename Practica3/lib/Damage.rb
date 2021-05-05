@@ -71,7 +71,7 @@ module Deepspace
 
           index = wt.index(t)   #Si no lo encuentra devuelve nil
         end
-
+        
         if index == nil
           index = -1
         end
@@ -103,10 +103,8 @@ module Deepspace
           
         else
           i = 0
-          copiaw = []
-          if w == nil
-            copiaw = []
-          else
+          copiaw = Array.new
+          if w != nil
             w.each do |weap|
               copiaw.push(weap)
             end
@@ -114,7 +112,7 @@ module Deepspace
           
           if danio.weapons != nil
             while i < danio.weapons.size
-              indice = arrayContainsType(copiaw, danio.weapons[i].type)
+              indice = arrayContainsType(copiaw, danio.weapons[i])
               if indice == -1
                 danio.weapons.delete_at(i)
               else
