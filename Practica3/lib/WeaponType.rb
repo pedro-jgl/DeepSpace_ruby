@@ -17,7 +17,7 @@ module Deepspace
           return "LASER"
         elsif self == WeaponType::MISSILE
           return "MISSILE"
-        else
+        else 
           return "PLASMA"
         end
       end

@@ -10,9 +10,9 @@ class Dice
     @FIRSTSHOTPROB = 0.5
     @generator     = nil 
   end    
+
+
   
-
-
   def initWithNHangars
     @generator = rand
     if @generator <= @NHANGARSPROB
