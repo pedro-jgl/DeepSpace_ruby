@@ -4,7 +4,6 @@ require_relative 'DamageToUI'
 module Deepspace
 
     class Damage 
-      #Así se crea una constante estática?
       @@NO_USE = -1 
 
       def initialize(w, s, wl)
