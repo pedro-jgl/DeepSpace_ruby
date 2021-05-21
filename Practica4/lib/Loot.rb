@@ -46,6 +46,7 @@ class Loot
   def to_s
     out = "NSupplies: " + nSupplies().to_s + "\n NShields: " + nShields().to_s +  "\nNHangars: " + nHangars().to_s + "\nNMedals: " + nMedals().to_s
     out += ("\ngetEfficient: " + getEfficient.to_s + "\nspaceCity: " + spaceCity.to_s)
+    
     return out
   end
 
