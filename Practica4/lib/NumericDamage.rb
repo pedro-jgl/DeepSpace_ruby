@@ -25,7 +25,7 @@ module Deepspace
         end
 
 
-        #Yo lo declararía sin el parámetro de entrada ya que no se usa
+        #Yo lo declararía sin el parámetro de entrada, ya que no se usa,
         #pero no sé si en los archivos que ha pasado el profesor, llama a 
         #este método con parámetro
         def discardWeapon(w)
