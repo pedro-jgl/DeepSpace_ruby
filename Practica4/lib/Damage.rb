@@ -20,7 +20,7 @@ module Deepspace
       
       attr_accessor :nShields
 
-      def discardWeapon
+      def discardWeapon(w)
       end
 
       def discardShieldBooster
@@ -29,13 +29,13 @@ module Deepspace
         end
       end
 
+
       def hasNoEffect
           return (nShields == 0)
 
       end
 
 
-      public
       def adjust_shields(s)
         if s != nil
           nShields = [nShields,s.size].min
