@@ -14,6 +14,9 @@ module Deepspace
       def self.newCopy(d)
         new(d.nShields)
       end
+
+      def copy 
+      end
       
       attr_accessor :nShields
 

@@ -20,6 +20,11 @@ module Deepspace
 
         end
 
+        def copy 
+            return NumericDamage.newCopy(self)
+        end
+        
+
         def discardWeapon
             if nWeapons > 0
                 nWeapons -= 1

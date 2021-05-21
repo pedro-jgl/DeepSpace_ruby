@@ -16,6 +16,11 @@ module Deepspace
 
         end
 
+        def copy
+            return SpecificDamage.newCopy(self)
+        end
+        
+
         def weapons
             return @weapons
 
