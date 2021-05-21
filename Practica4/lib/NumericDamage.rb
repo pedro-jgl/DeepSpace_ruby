@@ -54,10 +54,10 @@ module Deepspace
             return danio
         
         end
-        
+
 
         def to_s
-            out = super
+            out = super 
             out += ("\nNWeapons: " + nWeapons.to_s) 
 
             return out

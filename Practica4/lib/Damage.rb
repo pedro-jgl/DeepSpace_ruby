@@ -48,13 +48,13 @@ module Deepspace
 
 
       def to_s
-        out = "NShields: " + nShields.to_s 
+        out = "NShields: " + nShields.to_s  
 
         return out
 
       end
 
-      
+
       def getUIversion
         DamageToUI.new(self) 
       end

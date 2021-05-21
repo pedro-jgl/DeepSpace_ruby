@@ -91,7 +91,7 @@ module Deepspace
         end
 
         def to_s
-            out = super
+            out = super 
             out += "\nWeapons:\n"
     
             if weapons != nil
