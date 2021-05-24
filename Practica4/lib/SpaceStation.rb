@@ -295,6 +295,7 @@ module Deepspace
             end
         end
 
+        
         def setLoot(loot)
           dealer = Deepspace::CardDealer.instance
           h = loot.nHangars
@@ -328,7 +329,19 @@ module Deepspace
           medals = loot.nMedals
 
           @nMedals += medals
+
+          if loot.getEfficient
+            return Transformation::GETEFFICIENT
+          end
+          
+          if loot.spaceCity
+            return Transformation::SPACECITY
+          end
+
+          return Transformation::NOTRANSFORM
+
         end
+
 
         def setPendingDamage(d) #=d
             @pendingDamage = d.adjust(@weapons, @shieldBoosters)

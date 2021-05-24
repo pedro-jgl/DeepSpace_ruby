@@ -42,6 +42,12 @@ module Deepspace
         end
         
         
+        def setLoot(loot)
+            super(loot)
+
+            return Transformation::NOTRANSFORM
+            
+        end
 
     end
 
