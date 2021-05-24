@@ -49,6 +49,11 @@ module Deepspace
             
         end
 
+        def getUIversion
+            SpaceCityToUI.new(self)
+        end
+        
+
     end
 
 end

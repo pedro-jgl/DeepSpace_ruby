@@ -75,7 +75,14 @@ class Controller
           end
         when DS::CombatResult::NOCOMBAT
           @view.noCombatMessage()
+        when DS::CombatResult::STATIONWINSANDCONVERTS
+          @view.wonAndConvertCombatMessage
+          if @model.haveAWinner()
+            @view.wonGameMessage()
+            exit(0)
+          end
         end
+
     end
 
     def getUIversion() 

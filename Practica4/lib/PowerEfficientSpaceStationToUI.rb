@@ -8,7 +8,7 @@ module Deepspace;
   # @author Profe
   
 class PowerEfficientSpaceStationToUI < SpaceStationToUI 
-  def initialize (efficientStation) 
+  def initialize (efficientStation)
     super(efficientStation)
   end
   

@@ -1,5 +1,10 @@
+# encoding: utf-8
+
+require_relative 'Dice'
+require_relative 'PowerEfficientSpaceStation'
+
 module DeepSpace
-    class BetaPowerEfficientSpaceStation < PowerEfficientStation
+    class BetaPowerEfficientSpaceStation < PowerEfficientSpaceStation
         @@EXTRAEFFICIENCY=1.2
         def initialize(station)
             super
@@ -17,5 +22,9 @@ module DeepSpace
         def to_s
             return "BETA " + super
         end
+
+        def getUIversion()         
+            return BetaPowerEfficientSpaceStationToUI.new(self) 
+        end 
     end
 end

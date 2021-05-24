@@ -332,6 +332,15 @@ class TextMainView
     puts "No puedes combatir en este momento"
   end
   
+  def wonAndConvertCombatMessage 
+    if @gameUI.currentEnemy.loot.efficient
+      puts "Has GANADO el combate. \nAdemás te has CONVERTIDO en una estación EFICIENTE. \nDisfruta de tu botín"
+    else
+      puts "Has GANADO el combate. \nAdemás te has CONVERTIDO en una CIUDAD ESPACIAL. \nDisfruta de tu botín"
+    end
+    
+  end
+  
   def showStation(station) 
     out = ""
 
