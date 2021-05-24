@@ -16,18 +16,35 @@ module Deepspace
         @@MAXFUEL = 100
         @@SHIELDLOSSPERUNIT = 0.1
 
-        def initialize(ap, fu, n, nmed, sp, pd, w, sb, h)
-            @ammoPower = ap
-            @name = n
-            @shieldPower = sp 
-            @fuelUnits = fu 
-            @nMedals = nmed
+        #Se quita el otro constructor??
 
-            @pendingDamage = pd
-            @weapons = w
-            @shieldBoosters = sb
-            @hangar = h
+        def initialize(n, supplies)
+            @ammoPower = supplies.ammoPower
+            @name = n
+            @shieldPower = supplies.shieldPower
+            @fuelUnits = supplies.fuelUnits
+            @nMedals = 0
+
+            @pendingDamage = nil
+            @weapons = Array.new
+            @shieldBoosters = Array.new
+            @hangar = nil
         end
+
+
+        def newCopy(s)
+            @ammoPower = s.ammoPower
+            @name = s.name
+            @shieldPower = s.shieldPower
+            @fuelUnits = s.fuelUnits
+            @nMedals = s.nMedals
+
+            @pendingDamage = s.pendingDamage
+            @weapons = s.weapons
+            @shieldBoosters = s.shieldBoosters
+            @hangar = s.hangar
+        end
+
 
         private
         def assignFuelValue(f)
@@ -45,11 +62,8 @@ module Deepspace
             end
         end
 
-        public
-        def self.newSuppliesP(n, supplies)
-            new(supplies.ammoPower, supplies.fuelUnits, n, 0, supplies.shieldPower, nil, Array.new, Array.new, nil)
-        end
-
+        
+        public 
         def cleanUpMountedItems
 =begin
             for i in 0..@weapons.size
