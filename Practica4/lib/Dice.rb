@@ -8,6 +8,7 @@ class Dice
     @NSHIELDSPROB  = 0.25
     @NWEAPONSPROB  = 0.33
     @FIRSTSHOTPROB = 0.5
+    @EXTRAEFFICIENCYPROB = 0.8
     @generator     = nil 
   end    
 
@@ -82,6 +83,11 @@ class Dice
     return out
   end
   
+  def extraEfficiency
+    @generator = rand
+
+    return (@generator <= @EXTRAEFFICIENCYPROB)
+  end
 end #class
 
 end #module
