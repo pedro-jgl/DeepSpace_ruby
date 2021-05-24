@@ -2,8 +2,9 @@
 
 require_relative 'Dice'
 require_relative 'PowerEfficientSpaceStation'
+require_relative 'BetaPowerEfficientSpaceStationToUI'
 
-module DeepSpace
+module Deepspace
     class BetaPowerEfficientSpaceStation < PowerEfficientSpaceStation
         @@EXTRAEFFICIENCY=1.2
         def initialize(station)
@@ -12,7 +13,7 @@ module DeepSpace
         end
     
         def fire
-            if dice.extraEfficiency
+            if @dice.extraEfficiency
                 return super*@@EXTRAEFFICIENCY
             end
             

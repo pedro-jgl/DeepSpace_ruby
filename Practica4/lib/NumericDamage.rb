@@ -1,10 +1,13 @@
 # encoding: utf-8
 
+require_relative 'NumericDamageToUI'
+require_relative 'Damage'
+
 module Deepspace
 
     class NumericDamage < Damage
 
-        def initialize(s,w)
+        def initialize(w,s)
             super(s)
             @nWeapons = w 
 
@@ -12,11 +15,11 @@ module Deepspace
 
         public_class_method :new
 
-        #Se añade también attr_reader de nShields?
+        attr_accessor :nShields
         attr_accessor :nWeapons
 
         def self.newCopy(d)
-            new(d.nShields,d.nWeapons)
+            new(d.nWeapons, d.nShields)
 
         end
 
@@ -29,8 +32,8 @@ module Deepspace
         #pero no sé si en los archivos que ha pasado el profesor, llama a 
         #este método con parámetro
         def discardWeapon(w)
-            if nWeapons > 0
-                nWeapons -= 1
+            if @nWeapons > 0
+                @nWeapons -= 1
             end
         
         end
@@ -39,7 +42,7 @@ module Deepspace
         def hasNoEffect
             noeffect = false
 
-            if nWeapons == 0 && super
+            if @nWeapons == 0 && super
                 noeffect = true
             end
 
@@ -49,7 +52,7 @@ module Deepspace
 
 
         def adjust(w,s)
-            danio = NumericDamage.newCopy(self)
+            danio = copy
 
             danio.adjust_shields(s)
 
@@ -66,7 +69,7 @@ module Deepspace
 
         def to_s
             out = super 
-            out += ("\nNWeapons: " + nWeapons.to_s) 
+            out += ("\nNWeapons: " + @nWeapons.to_s) 
 
             return out
 
@@ -75,9 +78,7 @@ module Deepspace
 
         def getUIversion
             NumericDamageToUI.new(self) 
-          end
-
-
+        end
     end
 
 end

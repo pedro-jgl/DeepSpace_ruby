@@ -1,4 +1,7 @@
 # encoding: utf-8
+require_relative 'SpaceStation'
+require_relative 'Transformation'
+require_relative 'SpaceCityToUI'
 
 module Deepspace
 

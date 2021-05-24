@@ -9,6 +9,9 @@ require_relative 'CombatResult'
 require_relative 'GameCharacter'
 require_relative 'CardDealer'
 require_relative 'Transformation'
+require_relative 'PowerEfficientSpaceStation'
+require_relative 'BetaPowerEfficientSpaceStation'
+require_relative 'SpaceCity'
 
 module Deepspace
     
@@ -76,12 +79,18 @@ module Deepspace
         
         if transformacion == Transformation::GETEFFICIENT
           makeStationEfficient
+          
           combatResult = CombatResult::STATIONWINSANDCONVERTS
+
         elsif transformacion == Transformation::SPACECITY
           createSpaceCity
-          combatResult = CombatResult::STATIONWINSANDCONVERTS
-        end     
+
+          if !@haveSpaceCity
+            combatResult = CombatResult::STATIONWINSANDCONVERTS
+            
         
+          end     
+        end
       end
       
       gameState.next(self.turns, self.spaceStations.size)
@@ -153,11 +162,11 @@ module Deepspace
     def getUIversion()
       if currentStation == nil
         sup = SuppliesPackage.new(0,0,0)
-        @currentStation = SpaceStation.newSuppliesP("",sup)
+        @currentStation = SpaceStation.new("",sup)
       end
       if currentEnemy == nil
         sup = SuppliesPackage.new(0,0,0)
-        @currentEnemy = SpaceStation.newSuppliesP("",sup)
+        @currentEnemy = SpaceStation.new("",sup)
 
       end
       GameUniverseToUI.new(currentStation, currentEnemy) #??
@@ -186,7 +195,7 @@ module Deepspace
           for i in (0..size-1)
             @supplies = dealer.nextSuppliesPackage
 
-            station = SpaceStation.newSuppliesP(names[i], @supplies)
+            station = SpaceStation.new(names[i], @supplies)
 
             nh = dice.initWithNHangars
             nw = dice.initWithNWeapons
@@ -264,23 +273,23 @@ module Deepspace
     end
     
     def makeStationEfficient
-      if dice.extraEfficiency
-        @currentStation = BetaPowerEfficientSpaceStation.new(currentStation)
+      if @dice.extraEfficiency
+        @currentStation = BetaPowerEfficientSpaceStation.new(@currentStation)
       else
-        @currentStation = PowerEfficientSpaceStation.new(currentStation)
+        @currentStation = PowerEfficientSpaceStation.new(@currentStation)
       end
-      spaceStations.delete_at(currentStationIndex)
-      spaceStations[currentStationIndex] = currentStation
+      @spaceStations.delete_at(@currentStationIndex)
+      @spaceStations[@currentStationIndex] = @currentStation
     end
 
     
     def createSpaceCity
-      if !haveSpaceCity
+      if !@haveSpaceCity
         @currentStation = SpaceCity.new(@currentStation, @spaceStations)
         @haveSpaceCity = true
 
-        spaceStations.delete_at(currentStationIndex)
-        spaceStations[currentStationIndex] = currentStation
+        @spaceStations.delete_at(@currentStationIndex)
+        @spaceStations[@currentStationIndex] = @currentStation
       end
            
     end

@@ -1,6 +1,7 @@
 # encoding: utf-8
+require_relative 'WeaponType'
+require_relative 'Weapon'
 require_relative 'DamageToUI'
-
 module Deepspace
 
     class Damage
@@ -38,9 +39,11 @@ module Deepspace
 
       def adjust_shields(s)
         if s != nil
-          nShields = [nShields,s.size].min
+          if s.size < @nShields 
+            @nShields = s.size
+          end
         else
-          nShields = 0
+          @nShields = 0
         end
 
       end
@@ -51,7 +54,7 @@ module Deepspace
 
 
       def to_s
-        out = "NShields: " + nShields.to_s  
+        out = "NShields: " + @nShields.to_s  
 
         return out
 

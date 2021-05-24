@@ -2,8 +2,9 @@
 
 require_relative 'SpaceStation'
 require_relative 'Transformation'
+require_relative 'PowerEfficientSpaceStationToUI'
 
-module DeepSpace
+module Deepspace
     class PowerEfficientSpaceStation < SpaceStation
         @@EFFICIENCYFACTOR=1.10
 
@@ -22,7 +23,7 @@ module DeepSpace
         def setLoot(loot)
             super
 
-            if loot.getEfficient == Transformation::GETEFFICIENT
+            if loot.efficient == Transformation::GETEFFICIENT
                 return Transformation::GETEFFICIENT
             else
                 return Transformation::NOTRANSFORM

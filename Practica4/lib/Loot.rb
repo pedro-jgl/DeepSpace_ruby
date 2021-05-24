@@ -35,7 +35,7 @@ class Loot
     return @nMedals  
   end
 
-  def getEfficient
+  def efficient
     return @getEfficient
   end
 

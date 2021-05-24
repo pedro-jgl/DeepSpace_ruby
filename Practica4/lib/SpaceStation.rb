@@ -330,7 +330,7 @@ module Deepspace
 
           @nMedals += medals
 
-          if loot.getEfficient
+          if loot.efficient
             return Transformation::GETEFFICIENT
           end
           

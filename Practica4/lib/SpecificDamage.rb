@@ -1,9 +1,12 @@
 # encoding: utf-8
 
+require_relative 'SpecificDamageToUI'
+require_relative 'Damage'
+
 module Deepspace
 
     class SpecificDamage < Damage
-        def initialize(s,wl)
+        def initialize(wl,s)
             super(s)
             @weapons = wl
 
@@ -12,7 +15,7 @@ module Deepspace
         public_class_method :new
 
         def self.newCopy(d)
-            new(d.nShields, d.weapons)
+            new(d.weapons, d.nShields)
 
         end
 
@@ -20,6 +23,7 @@ module Deepspace
             return SpecificDamage.newCopy(self)
         end
         
+        attr_accessor :nShields
 
         def weapons
             return @weapons
@@ -37,7 +41,7 @@ module Deepspace
         def hasNoEffect
             noeffect = false
 
-            if weapons.size == 0 && super
+            if @weapons.empty? && super
                 noeffect = true
             end
 
@@ -67,7 +71,7 @@ module Deepspace
         private :arrayContainsType
 
         def adjust(w,s)
-            danio = SpecificDamage.newCopy(self)
+            danio = copy
 
             danio.adjust_shields(s)
 
@@ -99,7 +103,7 @@ module Deepspace
             out = super 
             out += "\nWeapons:\n"
     
-            if weapons != nil
+            if @weapons != nil
               @weapons.each_with_index do |s,i|
                 out += ("weapon " + (i+1).to_s + ": \n" + s.to_s + "\n")
               end
@@ -113,8 +117,6 @@ module Deepspace
         def getUIversion
             SpecificDamageToUI.new(self) 
           end
-
-
 
     end
 
