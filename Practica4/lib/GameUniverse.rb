@@ -83,13 +83,11 @@ module Deepspace
           combatResult = CombatResult::STATIONWINSANDCONVERTS
 
         elsif transformacion == Transformation::SPACECITY
-          createSpaceCity
-
           if !@haveSpaceCity
             combatResult = CombatResult::STATIONWINSANDCONVERTS
-            
-        
-          end     
+          end 
+
+          createSpaceCity    
         end
       end
       
