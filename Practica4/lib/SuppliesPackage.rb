@@ -26,7 +26,7 @@ class SuppliesPackage
     return @shieldPower
   end
 
-  def method_name
+  def to_s
     out = "AmmoPower: " + ammoPower().to_s + "\nFuelUnits: " + fuelUnits().to_s + "\nShieldPower: " + shieldPower().to_s 
 
   end
