@@ -167,7 +167,7 @@ module Deepspace
         @currentEnemy = SpaceStation.new("",sup)
 
       end
-      GameUniverseToUI.new(currentStation, currentEnemy) #??
+      GameUniverseToUI.new(currentStation, currentEnemy)
 
     end
 
@@ -270,6 +270,7 @@ module Deepspace
       
     end
     
+    private
     def makeStationEfficient
       if @dice.extraEfficiency
         @currentStation = BetaPowerEfficientSpaceStation.new(@currentStation)
@@ -280,7 +281,7 @@ module Deepspace
       @spaceStations[@currentStationIndex] = @currentStation
     end
 
-    
+    private
     def createSpaceCity
       if !@haveSpaceCity
         @currentStation = SpaceCity.new(@currentStation, @spaceStations)
